@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Green Shadow Agriculture</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
+
+<body>
+
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <h4 class="text-center">Green Shadow Agriculture</h4>
+    <p class="text-center text-white">Crop Monitoring System</p>
+    <a href="#"><i class="bi bi-house"></i> Dashboard</a>
+    <a href="#"><i class="bi bi-person"></i> Users</a>
+    <a href="#"><i class="bi bi-tree"></i> Crops</a>
+    <a href="#"><i class="bi bi-geo-alt"></i> Fields</a>
+    <a href="#" class="active"><i class="bi bi-bar-chart"></i> Monitoring Logs</a>
+    <a href="#"><i class="bi bi-people"></i> Staff</a>
+    <a href="#"><i class="bi bi-tools"></i> Equipment</a>
+    <a href="#"><i class="bi bi-truck"></i> Vehicles</a>
+    <a href="#"><i class="bi bi-box-arrow-right"></i> Logout</a>
+  </div>
+
+  <!-- Main Content -->
+  <div class="dashboard-container">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">Monitoring Logs</a>
+        <span id="dateTime" class="ms-auto clock"></span>
+      </div>
+    </nav>
+
+    <!-- Dashboard Content -->
+    <div class="container">
+      <h2>Monitoring Log Management</h2>
+
+      <!-- Search Monitoring Log  -->
+      <div class="search-container">
+        <input type="text" id="searchLog" class="search-bar" placeholder="Search Logs..." onkeyup="searchLogs()">
+      </div>
+
+      <form id="logForm" class="mt-4" enctype="multipart/form-data">
+        <div class="row g-3">
+          <div class="col-md-6">
+            <label for="logCode" class="form-label">Log Code</label>
+            <input type="text" class="form-control form-control-sm" id="logCode" name="logCode" required>
+          </div>
+          <div class="col-md-6">
+            <label for="logDate" class="form-label">Log Date</label>
+            <input type="date" class="form-control form-control-sm" id="logDate" name="logDate" required>
+          </div>
+        </div>
+        <div class="row g-3 mt-3">
+          <div class="col-md-12">
+            <label for="logDetails" class="form-label">Log Details</label>
+            <textarea class="form-control form-control-sm" id="logDetails" name="logDetails" rows="3" required></textarea>
+          </div>
+        </div>
+        <div class="row g-3 mt-3">
+          <div class="col-md-4">
+            <label for="staffId" class="form-label">Staff ID</label>
+            <input type="text" class="form-control form-control-sm" id="staffId" name="staffId" required>
+          </div>
+          <div class="col-md-4">
+            <label for="fieldCode" class="form-label">Field Code</label>
+            <input type="text" class="form-control form-control-sm" id="fieldCode" name="fieldCode" required>
+          </div>
+          <div class="col-md-4">
+            <label for="cropCode" class="form-label">Crop Code</label>
+            <input type="text" class="form-control form-control-sm" id="cropCode" name="cropCode" required>
+          </div>
+        </div>
+
+        <!-- Image Upload Fields -->
+        <div class="image-upload-container mt-4 d-flex justify-content-center gap-3">
+          <div class="form-group text-center">
+            <label for="observedImage" class="form-label d-block">Observed Image</label>
+            <div class="image-upload-wrapper">
+              <img id="previewImage01" class="image-preview"
+                   src="https://via.placeholder.com/200x200?text=Click+to+upload+Image+1" alt="Image 1 Preview">
+              <input type="file" class="form-control d-none" id="observedImage" name="observedImage" accept="image/*"
+                     required>
+            </div>
+          </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="d-flex justify-content-end mt-4 gap-2">
+          <button type="submit" class="btn btn-primary btn-sm">Submit</button>
+          <button type="button" class="btn btn-secondary btn-sm">Update</button>
+        </div>
+      </form>
+
+      <!-- Table to Display Log Details -->
+      <div class="table-container mt-5">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Log Code</th>
+              <th>Date</th>
+              <th>Field Code</th>
+              <th>Crop Code</th>
+              <th>Staff ID</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="logTableBody">
+          <!-- Log data rows will be inserted here -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+
+<!-- Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+<script>
+  // Date and time update logic
+  function updateDateTime() {
+    const now = new Date();
+    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' };
+    document.getElementById('dateTime').textContent = now.toLocaleString('en-US', options);
+  }
+  setInterval(updateDateTime, 1000);
+  updateDateTime();
+
+  // Observed Image Preview
+  document.getElementById('previewObservedImage').addEventListener('click', function () {
+    document.getElementById('observedImage').click();
+  });
+
+  document.getElementById('observedImage').addEventListener('change', function (e) {
+    const preview = document.getElementById('previewObservedImage');
+    const file = e.target.files[0];
+    const reader = new FileReader();
+    reader.onload = function (e) {
+      preview.src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+  });
+
+  // Search Logs Functionality
+  function searchLogs() {
+    const query = document.getElementById('searchLog').value.toLowerCase();
+    const rows = document.querySelectorAll('#logTableBody tr');
+    rows.forEach(row => {
+      const logCode = row.cells[0].textContent.toLowerCase();
+      const logDetails = row.cells[2].textContent.toLowerCase();
+      if (logCode.includes(query) || logDetails.includes(query)) {
+        row.style.display = '';
+      } else {
+        row.style.display = 'none';
+      }
+    });
+  }
+</script>
+</body>
+
+</html>
