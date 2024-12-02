@@ -21,8 +21,7 @@
     <a href="#"><i class="bi bi-geo-alt"></i> Fields</a>
     <a href="#"><i class="bi bi-bar-chart"></i> Monitoring Logs</a>
     <a href="#"><i class="bi bi-people"></i> Staff</a>
-    <a href="#" class="active"><i class="bi bi-tools"></i> Equipment</a>
-    <a href="#"><i class="bi bi-truck"></i> Vehicles</a>
+    <a href="#" class="active"><i class="bi bi-truck"></i> Vehicles</a>
     <a href="#"><i class="bi bi-box-arrow-right"></i> Logout</a>
   </div>
 
@@ -31,52 +30,58 @@
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg">
       <div class="container-fluid">
-        <a class="navbar-brand" href="#">Equipments Information</a>
+        <a class="navbar-brand" href="#">Vehicle Management</a>
         <span id="dateTime" class="ms-auto clock"></span>
       </div>
     </nav>
 
-    <!-- Equipments Content -->
+    <!-- Vehicle Content -->
     <div class="container">
-      <h2>Equipments Management</h2>
+      <h2>Vehicle Management</h2>
 
-      <!-- Search Equipments -->
+      <!-- Search Vehicle -->
       <div class="search-container">
-        <input type="text" id="searchEquipment" class="search-bar" placeholder="Search Equipment..." onkeyup="searchEquipments()">
+        <input type="text" id="searchVehicle" class="search-bar" placeholder="Search Vehicle..." onkeyup="searchFields()">
       </div>
 
-      <form id="EquipmentForm">
+      <form id="VehicleForm">
         <div class="row g-3">
           <div class="col-md-4">
-            <label for="equipmentId" class="form-label">Equipment ID</label>
-            <input type="text" class="form-control form-control-sm" id="equipmentId" name="equipmentId" required>
+            <label for="vehicleCode" class="form-label">Vehicle Code</label>
+            <input type="text" class="form-control form-control-sm" id="vehicleCode" name="vehicleCode" required>
           </div>
           <div class="col-md-4">
-            <label for="equipmentName" class="form-label">Equipment Name</label>
-            <input type="text" class="form-control form-control-sm" id="equipmentName" name="equipmentName" required>
+            <label for="licensePlateNumber" class="form-label">License Plate Number</label>
+            <input type="text" class="form-control form-control-sm" id="licensePlateNumber" name="licensePlateNumber" required>
           </div>
           <div class="col-md-4">
-            <label for="equipmentType" class="form-label">Equipment Type</label>
-            <input type="text" class="form-control form-control-sm" id="equipmentType" name="equipmentType" required>
+            <label for="vehicleCategory" class="form-label">Vehicle Category</label>
+            <input type="text" class="form-control form-control-sm" id="vehicleCategory" name="vehicleCategory" required>
           </div>
         </div>
 
         <div class="row g-3 mt-3">
           <div class="col-md-4">
+            <label for="fuelType" class="form-label">Fuel Type</label>
+            <input type="text" class="form-control form-control-sm" id="fuelType" name="fuelType" required>
+          </div>
+          <div class="col-md-4">
             <label for="status" class="form-label">Status</label>
-            <select id="status" class="form-select form-select-sm" name="status" required>
-              <option value="AVAILABLE">Available</option>
-              <option value="UNAVAILABLE">Unavailable</option>
-              <option value="MAINTENANCE">Maintenance</option>
+            <select id="status" class="form-select form-select-sm" required>
+              <option value="ACTIVE">Active</option>
+              <option value="INACTIVE">Inactive</option>
             </select>
           </div>
           <div class="col-md-4">
-            <label for="staffId" class="form-label">Assigned Staff ID</label>
-            <input type="text" class="form-control form-control-sm" id="staffId" name="staffId">
+            <label for="remarks" class="form-label">Remarks</label>
+            <input type="text" class="form-control form-control-sm" id="remarks" name="remarks">
           </div>
+        </div>
+
+        <div class="row g-3 mt-3">
           <div class="col-md-4">
-            <label for="fieldCode" class="form-label">Field Code</label>
-            <input type="text" class="form-control form-control-sm" id="fieldCode" name="fieldCode">
+            <label for="staffId" class="form-label">Staff ID</label>
+            <input type="text" class="form-control form-control-sm" id="staffId" name="staffId" required>
           </div>
         </div>
 
@@ -86,20 +91,21 @@
         </div>
       </form>
 
-      <!-- Table to display equipment details -->
-      <div class="table-container">
+      <!-- Vehicle Table -->
+      <div class="table-container mt-5">
         <table class="table table-striped">
           <thead>
-            <tr>
-              <th>Equipment ID</th>
-              <th>Equipment Name</th>
-              <th>Type</th>
-              <th>Status</th>
-              <th>Action</th>
-            </tr>
+          <tr>
+            <th>Vehicle Code</th>
+            <th>Category</th>
+            <th>Fuel Type</th>
+            <th>Status</th>
+            <th>Staff ID</th>
+            <th>Actions</th>
+          </tr>
           </thead>
-          <tbody id="EquipmentTableBody">
-          <!-- Equipment data rows will be inserted here -->
+          <tbody id="vehicleTableBody">
+          <!-- Vehicle data rows will be inserted here -->
           </tbody>
         </table>
       </div>
