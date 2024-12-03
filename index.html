@@ -1,10 +1,666 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Title</title>
+    <title>Green Shadow Agriculture</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="./assets/style.css">
 </head>
 <body>
+    <div id="signInPage" class="signStyle">
+        <div class="container d-flex justify-content-center align-items-center vh-100">
+            <div class="card p-4 signCard" style="width: 28rem;">
+                <h1 class="text-center mb-4 text-success">Login Page</h1>
+                <h5 class="text-center mb-4 text-success">Green Shadow Agriculture</h5>
+                <p class="text-muted text-center mb-3">Sign in to access the Crop Monitoring System</p>
+                <form>
+                    <div class="mb-3">
+                        <label for="signInEmail" class="form-label">Email Address</label>
+                        <input type="email" class="form-control signInputs" id="signInEmail" placeholder="Enter your email">
+                    </div>
+                    <div class="mb-3">
+                        <label for="signInPassword" class="form-label">Password</label>
+                        <input type="password" class="form-control signInputs" id="signInPassword" placeholder="Enter your password">
+                    </div>
+                    <div class="mb-3 form-check">
+                        <input type="checkbox" class="form-check-input" id="remember">
+                        <label class="form-check-label" for="remember">Remember Me</label>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100 signButton">Sign In</button>
+                    <p class="text-center mt-3">
+                        Don't have an account? <a href="pages/signUp.html" class="text-success">Sign Up</a>
+                    </p>
+                </form>
+            </div>
+        </div>
+    </div>
 
+    <div id="signUpPage" class="signStyle">
+        <div class="container d-flex justify-content-center align-items-center vh-100">
+            <div class="card p-4 signCard" style="width: 30rem;">
+                <h1 class="text-center mb-4 text-success">Signup</h1>
+                <h5 class="text-center mb-4 text-success">Green Shadow Agriculture</h5>
+                <p class="text-muted text-center mb-3">Create an account to access the Crop Monitoring System</p>
+                <form>
+                    <div class="mb-3">
+                        <label for="signUpEmail" class="form-label">Email Address</label>
+                        <input type="email" class="form-control signInputs" id="signUpEmail" placeholder="Enter your email">
+                    </div>
+                    <div class="mb-3">
+                        <label for="signUpPassword" class="form-label">Password</label>
+                        <input type="password" class="form-control signInputs" id="signUpPassword" placeholder="Create a password">
+                    </div>
+                    <div class="mb-3">
+                        <label for="signUpRole" class="form-label">Role</label>
+                        <select class="form-select" id="signUpRole">
+                            <option value="MANAGER">Manager</option>
+                            <option value="EMPLOYEE">Employee</option>
+                            <option value="ADMINISTRATIVE">Administrative</option>
+                            <option value="SCIENTIST">Scientist</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-success w-100 signButton">Sign Up</button>
+                    <p class="text-center mt-3">
+                        Already have an account? <a href="index.html" class="text-success">Sign In</a>
+                    </p>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sidebar -->
+    <div id="allPageSidebar">
+        <div class="sidebar">
+            <h4 class="text-center">Green Shadow Agriculture</h4>
+            <p class="text-center text-white">Crop Monitoring System</p>
+            <a href="#" class="active"><i class="bi bi-house"></i> Dashboard</a>
+            <a href="#"><i class="bi bi-person"></i> Users</a>
+            <a href="#"><i class="bi bi-tree"></i> Crops</a>
+            <a href="#"><i class="bi bi-geo-alt"></i> Fields</a>
+            <a href="#"><i class="bi bi-bar-chart"></i> Monitoring Logs</a>
+            <a href="#"><i class="bi bi-people"></i> Staff</a>
+            <a href="#"><i class="bi bi-tools"></i> Equipment</a>
+            <a href="#"><i class="bi bi-truck"></i> Vehicles</a>
+            <a href="#"><i class="bi bi-box-arrow-right"></i> Logout</a>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div id="mainContentOfPages" class="dashboard-container">
+
+        <!-- Navbar -->
+        <div id="Navbar">
+            <nav class="navbar navbar-expand-lg">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="#">Dashboard</a>
+                    <span id="dateTime" class="ms-auto clock"></span>
+                </div>
+            </nav>
+        </div>
+
+        <!-- Dashboard Content -->
+        <div id="dashBoardPage">
+            <div class="container mt-4">
+                <h2>Welcome to Green Shadow Agriculture</h2>
+                <p>This is your dashboard. Navigate through the side menu to manage different entities.</p>
+            </div>
+        </div>
+
+        <!-- Field Content -->
+        <div id="fieldPage">
+            <div class="container containerPage">
+                <h2>Field Management</h2>
+
+                <!-- Search Field -->
+                <div class="search-container">
+                    <input type="text" id="searchField" class="search-bar" placeholder="Search Fields..." onkeyup="searchFields()">
+                </div>
+
+                <form id="fieldForm" class="mt-4" enctype="multipart/form-data">
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label for="fieldCode" class="form-label">Field Code</label>
+                            <input type="text" class="form-control form-control-sm" id="fieldCode" name="fieldCode" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="fieldName" class="form-label">Field Name</label>
+                            <input type="text" class="form-control form-control-sm" id="fieldName" name="fieldName" required>
+                        </div>
+                    </div>
+                    <div class="row g-3 mt-3">
+                        <div class="col-md-6">
+                            <label for="fieldLocation" class="form-label">Field Location</label>
+                            <input type="text" class="form-control form-control-sm" id="fieldLocation" name="fieldLocation" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="fieldSize" class="form-label">Field Size (in acres)</label>
+                            <input type="number" step="0.01" class="form-control form-control-sm" id="fieldSize" name="fieldSize" required>
+                        </div>
+                    </div>
+
+                    <!-- Image Upload Fields -->
+                    <div class="image-upload-container mt-4 d-flex justify-content-center gap-3">
+                        <div class="form-group text-center">
+                            <label for="fieldImage01" class="form-label d-block">Field Image 1</label>
+                            <div class="image-upload-wrapper">
+                                <img id="previewFieldImage01" class="image-preview"
+                                     src="https://via.placeholder.com/200x200?text=Click+to+upload+Image+1" alt="Image 1 Preview">
+                                <input type="file" class="form-control d-none" id="fieldImage01" name="fieldImage01" accept="image/*"
+                                       required>
+                            </div>
+                        </div>
+                        <div class="form-group text-center">
+                            <label for="fieldImage02" class="form-label d-block">Field Image 2</label>
+                            <div class="image-upload-wrapper">
+                                <img id="previewFieldImage02" class="image-preview"
+                                     src="https://via.placeholder.com/200x200?text=Click+to+upload+Image+2" alt="Image 2 Preview">
+                                <input type="file" class="form-control d-none" id="fieldImage02" name="fieldImage02" accept="image/*"
+                                       required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="d-flex justify-content-end mt-4 gap-2">
+                        <button type="submit" class="btn btn-primary btn-sm">Submit</button>
+                        <button type="button" class="btn btn-secondary btn-sm">Update</button>
+                    </div>
+                </form>
+
+                <!-- Table to Display Field Details -->
+                <div class="table-container mt-5">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>Field Code</th>
+                            <th>Field Name</th>
+                            <th>Location</th>
+                            <th>Size (Acres)</th>
+                            <th>Action</th>
+                        </tr>
+                        </thead>
+                        <tbody id="fieldTableBody">
+                        <!-- Field data rows will be inserted here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Staff Content -->
+        <div id="staffPage">
+            <div class="container containerPage">
+                <h2>Staff Management</h2>
+
+                <!-- Search Staff -->
+                <div class="search-container">
+                    <input type="text" id="searchStaff" class="search-bar" placeholder="Search Staff..." onkeyup="searchFields()">
+                </div>
+
+                <form id="StaffForm">
+                    <div class="row g-3">
+                        <div class="col-md-4">
+                            <label for="staffId" class="form-label">Staff ID</label>
+                            <input type="text" class="form-control form-control-sm" id="staffId" name="staffId" required>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="firstName" class="form-label">First Name</label>
+                            <input type="text" class="form-control form-control-sm" id="firstName" name="firstName" required>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="lastName" class="form-label">Last Name</label>
+                            <input type="text" class="form-control form-control-sm" id="lastName" name="lastName" required>
+                        </div>
+                    </div>
+
+                    <div class="row g-3 mt-3">
+                        <div class="col-md-4">
+                            <label for="designation" class="form-label">Designation</label>
+                            <input type="text" class="form-control form-control-sm" id="designation" name="designation" required>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="gender" class="form-label">Gender</label>
+                            <select id="gender" class="form-select form-select-sm" required>
+                                <option value="MALE">Male</option>
+                                <option value="FEMALE">Female</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="StaffRole" class="form-label">Role</label>
+                            <select id="StaffRole" class="form-select form-select-sm" name="role" required>
+                                <option value="MANAGER">Manager</option>
+                                <option value="EMPLOYEE">Employee</option>
+                                <option value="ADMINISTRATIVE">Administrative</option>
+                                <option value="SCIENTIST">Scientist</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row g-3 mt-3">
+                        <div class="col-md-6">
+                            <label for="joinDate" class="form-label">Join Date</label>
+                            <input type="date" class="form-control form-control-sm" id="joinDate" name="joinDate" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="dateOfBirth" class="form-label">Date of Birth</label>
+                            <input type="date" class="form-control form-control-sm" id="dateOfBirth" name="dateOfBirth" required>
+                        </div>
+                    </div>
+
+                    <div class="row g-3 mt-3">
+                        <div class="col-md-4">
+                            <label for="contactNo" class="form-label">Contact Number</label>
+                            <input type="text" class="form-control form-control-sm" id="contactNo" name="contactNo" required>
+                        </div>
+                        <div class="col-md-8">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" class="form-control form-control-sm" id="email" name="email" required>
+                        </div>
+                    </div>
+
+                    <div class="row g-3 mt-3">
+                        <div class="col-md-12">
+                            <label for="address01" class="form-label">Address</label>
+                            <input type="text" class="form-control form-control-sm mb-2" id="address01" name="address01" placeholder="Address Line 1" required>
+                            <input type="text" class="form-control form-control-sm mb-2" id="address02" name="address02" placeholder="Address Line 2">
+                            <input type="text" class="form-control form-control-sm mb-2" id="address03" name="address03" placeholder="Address Line 3">
+                            <input type="text" class="form-control form-control-sm mb-2" id="address04" name="address04" placeholder="Address Line 4">
+                            <input type="text" class="form-control form-control-sm mb-2" id="address05" name="address05" placeholder="Address Line 5">
+                        </div>
+                    </div>
+
+                    <div class="mt-4 d-flex justify-content-end gap-2">
+                        <button type="submit" class="btn btn-primary btn-sm">Submit</button>
+                        <button type="button" class="btn btn-secondary btn-sm">Update</button>
+                    </div>
+                </form>
+
+                <!-- Table to display Staff details -->
+                <div class="table-container">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>Staff Id</th>
+                            <th>First Name</th>
+                            <th>Designation</th>
+                            <th>Email</th>
+                            <th>Action</th>
+                        </tr>
+                        </thead>
+                        <tbody id="StaffTableBody">
+                        <!-- Staff data rows will be inserted here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Crop Content -->
+        <div id="cropPage">
+            <div class="container containerPage">
+                <h2>Crop Management</h2>
+
+                <!-- Search Crop -->
+                <div class="search-container">
+                    <input type="text" id="searchCrop" class="search-bar" placeholder="Search Crops..." onkeyup="searchCrops()">
+                </div>
+
+                <form id="cropForm" class="mt-4" enctype="multipart/form-data">
+                    <div class="row g-3">
+                        <div class="col-md-4">
+                            <label for="cropCode" class="form-label">Crop Code</label>
+                            <input type="text" class="form-control form-control-sm" id="cropCode" name="cropCode" required>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="cropCommonName" class="form-label">Common Name</label>
+                            <input type="text" class="form-control form-control-sm" id="cropCommonName" name="cropCommonName" required>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="cropScientificName" class="form-label">Scientific Name</label>
+                            <input type="text" class="form-control form-control-sm" id="cropScientificName" name="cropScientificName" required>
+                        </div>
+                    </div>
+                    <div class="row g-3">
+                        <div class="col-md-4">
+                            <label for="cropCategory" class="form-label">Category</label>
+                            <input type="text" class="form-control form-control-sm" id="cropCategory" name="cropCategory" required>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="cropSeason" class="form-label">Season</label>
+                            <input type="text" class="form-control form-control-sm" id="cropSeason" name="cropSeason" required>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="cropFieldCode" class="form-label">Field Code</label>
+                            <input type="text" class="form-control form-control-sm" id="cropFieldCode" name="fieldCode" required>
+                        </div>
+                    </div>
+
+                    <!-- Image Upload Field -->
+                    <div class="image-upload-container mt-4 d-flex justify-content-center gap-3">
+                        <div class="form-group text-center">
+                            <label for="cropImage01" class="form-label d-block">Crop Image</label>
+                            <div class="image-upload-wrapper">
+                                <img id="previewCropImage01" class="image-preview"
+                                     src="https://via.placeholder.com/200x200?text=Click+to+upload+Image+1" alt="Image 1 Preview">
+                                <input type="file" class="form-control d-none" id="cropImage01" name="cropImage01" accept="image/*"
+                                       required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="d-flex justify-content-end mt-4 gap-2">
+                        <button type="submit" class="btn btn-primary btn-sm">Submit</button>
+                        <button type="button" class="btn btn-secondary btn-sm">Update</button>
+                    </div>
+                </form>
+
+                <!-- Table to Display Crop Details -->
+                <div class="table-container">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>Crop Code</th>
+                            <th>Common Name</th>
+                            <th>Scientific Name</th>
+                            <th>Category</th>
+                            <th>Action</th>
+                        </tr>
+                        </thead>
+                        <tbody id="CropTableBody">
+                        <!-- Crop data rows will be inserted here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Equipments Content -->
+        <div id="equipmentPage">
+            <div class="container containerPage">
+                <h2>Equipments Management</h2>
+
+                <!-- Search Equipments -->
+                <div class="search-container">
+                    <input type="text" id="searchEquipment" class="search-bar" placeholder="Search Equipment..." onkeyup="searchEquipments()">
+                </div>
+
+                <form id="EquipmentForm">
+                    <div class="row g-3">
+                        <div class="col-md-4">
+                            <label for="equipmentId" class="form-label">Equipment ID</label>
+                            <input type="text" class="form-control form-control-sm" id="equipmentId" name="equipmentId" required>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="equipmentName" class="form-label">Equipment Name</label>
+                            <input type="text" class="form-control form-control-sm" id="equipmentName" name="equipmentName" required>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="equipmentType" class="form-label">Equipment Type</label>
+                            <input type="text" class="form-control form-control-sm" id="equipmentType" name="equipmentType" required>
+                        </div>
+                    </div>
+
+                    <div class="row g-3 mt-3">
+                        <div class="col-md-4">
+                            <label for="status" class="form-label">Status</label>
+                            <select id="status" class="form-select form-select-sm" name="status" required>
+                                <option value="AVAILABLE">Available</option>
+                                <option value="UNAVAILABLE">Unavailable</option>
+                                <option value="MAINTENANCE">Maintenance</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="equipmentStaffId" class="form-label">Assigned Staff ID</label>
+                            <input type="text" class="form-control form-control-sm" id="equipmentStaffId" name="staffId">
+                        </div>
+                        <div class="col-md-4">
+                            <label for="fieldCode" class="form-label">Field Code</label>
+                            <input type="text" class="form-control form-control-sm" id="equipmentFieldCode" name="fieldCode">
+                        </div>
+                    </div>
+
+                    <div class="mt-4 d-flex justify-content-end gap-2">
+                        <button type="submit" class="btn btn-primary btn-sm">Submit</button>
+                        <button type="button" class="btn btn-secondary btn-sm">Update</button>
+                    </div>
+                </form>
+
+                <!-- Table to display equipment details -->
+                <div class="table-container">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>Equipment ID</th>
+                            <th>Equipment Name</th>
+                            <th>Type</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                        </thead>
+                        <tbody id="EquipmentTableBody">
+                        <!-- Equipment data rows will be inserted here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Vehicle Content -->
+        <div id="vehiclePage">
+            <div class="container containerPage">
+                <h2>Vehicle Management</h2>
+
+                <!-- Search Vehicle -->
+                <div class="search-container">
+                    <input type="text" id="searchVehicle" class="search-bar" placeholder="Search Vehicle..." onkeyup="searchFields()">
+                </div>
+
+                <form id="VehicleForm">
+                    <div class="row g-3">
+                        <div class="col-md-4">
+                            <label for="vehicleCode" class="form-label">Vehicle Code</label>
+                            <input type="text" class="form-control form-control-sm" id="vehicleCode" name="vehicleCode" required>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="licensePlateNumber" class="form-label">License Plate Number</label>
+                            <input type="text" class="form-control form-control-sm" id="licensePlateNumber" name="licensePlateNumber" required>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="vehicleCategory" class="form-label">Vehicle Category</label>
+                            <input type="text" class="form-control form-control-sm" id="vehicleCategory" name="vehicleCategory" required>
+                        </div>
+                    </div>
+
+                    <div class="row g-3 mt-3">
+                        <div class="col-md-4">
+                            <label for="fuelType" class="form-label">Fuel Type</label>
+                            <input type="text" class="form-control form-control-sm" id="fuelType" name="fuelType" required>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="vehicleStatus" class="form-label">Status</label>
+                            <select id="vehicleStatus" class="form-select form-select-sm" required>
+                                <option value="ACTIVE">Active</option>
+                                <option value="INACTIVE">Inactive</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="remarks" class="form-label">Remarks</label>
+                            <input type="text" class="form-control form-control-sm" id="remarks" name="remarks">
+                        </div>
+                    </div>
+
+                    <div class="row g-3 mt-3">
+                        <div class="col-md-4">
+                            <label for="vehicleStaffId" class="form-label">Staff ID</label>
+                            <input type="text" class="form-control form-control-sm" id="vehicleStaffId" name="staffId" required>
+                        </div>
+                    </div>
+
+                    <div class="mt-4 d-flex justify-content-end gap-2">
+                        <button type="submit" class="btn btn-primary btn-sm">Submit</button>
+                        <button type="button" class="btn btn-secondary btn-sm">Update</button>
+                    </div>
+                </form>
+
+                <!-- Vehicle Table -->
+                <div class="table-container mt-5">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>Vehicle Code</th>
+                            <th>Category</th>
+                            <th>Fuel Type</th>
+                            <th>Status</th>
+                            <th>Staff ID</th>
+                            <th>Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody id="vehicleTableBody">
+                        <!-- Vehicle data rows will be inserted here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Monitoring Log Content -->
+        <div id="monitoringLogPage">
+            <div class="container containerPage">
+                <h2>Monitoring Log Management</h2>
+
+                <!-- Search Monitoring Log  -->
+                <div class="search-container">
+                    <input type="text" id="searchLog" class="search-bar" placeholder="Search Logs..." onkeyup="searchLogs()">
+                </div>
+
+                <form id="logForm" class="mt-4" enctype="multipart/form-data">
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label for="logCode" class="form-label">Log Code</label>
+                            <input type="text" class="form-control form-control-sm" id="logCode" name="logCode" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="logDate" class="form-label">Log Date</label>
+                            <input type="date" class="form-control form-control-sm" id="logDate" name="logDate" required>
+                        </div>
+                    </div>
+                    <div class="row g-3 mt-3">
+                        <div class="col-md-12">
+                            <label for="logDetails" class="form-label">Log Details</label>
+                            <textarea class="form-control form-control-sm" id="logDetails" name="logDetails" rows="3" required></textarea>
+                        </div>
+                    </div>
+                    <div class="row g-3 mt-3">
+                        <div class="col-md-4">
+                            <label for="logStaffId" class="form-label">Staff ID</label>
+                            <input type="text" class="form-control form-control-sm" id="logStaffId" name="staffId" required>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="logeFieldCode" class="form-label">Field Code</label>
+                            <input type="text" class="form-control form-control-sm" id="logeFieldCode" name="fieldCode" required>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="logeCropCode" class="form-label">Crop Code</label>
+                            <input type="text" class="form-control form-control-sm" id="logeCropCode" name="cropCode" required>
+                        </div>
+                    </div>
+
+                    <!-- Image Upload Fields -->
+                    <div class="image-upload-container mt-4 d-flex justify-content-center gap-3">
+                        <div class="form-group text-center">
+                            <label for="observedImage" class="form-label d-block">Observed Image</label>
+                            <div class="image-upload-wrapper">
+                                <img id="previewImage01" class="image-preview"
+                                     src="https://via.placeholder.com/200x200?text=Click+to+upload+Image+1" alt="Image 1 Preview">
+                                <input type="file" class="form-control d-none" id="observedImage" name="observedImage" accept="image/*"
+                                       required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="d-flex justify-content-end mt-4 gap-2">
+                        <button type="submit" class="btn btn-primary btn-sm">Submit</button>
+                        <button type="button" class="btn btn-secondary btn-sm">Update</button>
+                    </div>
+                </form>
+
+                <!-- Table to Display Log Details -->
+                <div class="table-container mt-5">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>Log Code</th>
+                            <th>Date</th>
+                            <th>Field Code</th>
+                            <th>Crop Code</th>
+                            <th>Staff ID</th>
+                            <th>Action</th>
+                        </tr>
+                        </thead>
+                        <tbody id="logTableBody">
+                        <!-- Log data rows will be inserted here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- User Content -->
+        <div id="userPage">
+            <div class="container containerPage">
+                <h2>User Management</h2>
+
+                <!-- User Form -->
+                <form id="UserForm">
+                    <div class="row g-3">
+                        <div class="col-md-4">
+                            <label for="userEmail" class="form-label">Email</label>
+                            <input type="email" class="form-control form-control-sm" id="userEmail" name="email" required>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="userPassword" class="form-label">Password</label>
+                            <input type="password" class="form-control form-control-sm" id="userPassword" name="password" required>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="userRole" class="form-label">Role</label>
+                            <select id="userRole" class="form-select form-select-sm" name="role" required>
+                                <option value="MANAGER">Manager</option>
+                                <option value="EMPLOYEE">Employee</option>
+                                <option value="ADMINISTRATIVE">Administrative</option>
+                                <option value="SCIENTIST">Scientist</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="mt-4 d-flex justify-content-end gap-2">
+                        <button type="submit" class="btn btn-primary btn-sm">Submit</button>
+                        <button type="button" class="btn btn-secondary btn-sm">Update</button>
+                    </div>
+                </form>
+
+                <!-- Table to display User details -->
+                <div class="table-container mt-4">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>Email</th>
+                            <th>Role</th>
+                            <th>Action</th>
+                        </tr>
+                        </thead>
+                        <tbody id="UserTableBody">
+                        <!-- User data rows will be inserted here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>

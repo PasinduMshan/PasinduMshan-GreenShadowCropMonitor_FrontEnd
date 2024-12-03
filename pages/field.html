@@ -37,83 +37,87 @@
         </nav>
 
         <!-- Field Content -->
-        <div class="container">
-            <h2>Field Management</h2>
+        <div id="fieldPage">
+            <div class="container containerPage">
+                <h2>Field Management</h2>
 
-            <!-- Search Field -->
-            <div class="search-container">
-                <input type="text" id="searchField" class="search-bar" placeholder="Search Fields..." onkeyup="searchFields()">
-            </div>
-
-            <form id="fieldForm" class="mt-4" enctype="multipart/form-data">
-                <div class="row g-3">
-                    <div class="col-md-6">
-                        <label for="fieldCode" class="form-label">Field Code</label>
-                        <input type="text" class="form-control form-control-sm" id="fieldCode" name="fieldCode" required>
-                    </div>
-                    <div class="col-md-6">
-                        <label for="fieldName" class="form-label">Field Name</label>
-                        <input type="text" class="form-control form-control-sm" id="fieldName" name="fieldName" required>
-                    </div>
-                </div>
-                <div class="row g-3 mt-3">
-                    <div class="col-md-6">
-                        <label for="fieldLocation" class="form-label">Field Location</label>
-                        <input type="text" class="form-control form-control-sm" id="fieldLocation" name="fieldLocation" required>
-                    </div>
-                    <div class="col-md-6">
-                        <label for="fieldSize" class="form-label">Field Size (in acres)</label>
-                        <input type="number" step="0.01" class="form-control form-control-sm" id="fieldSize" name="fieldSize" required>
-                    </div>
+                <!-- Search Field -->
+                <div class="search-container">
+                    <input type="text" id="searchField" class="search-bar" placeholder="Search Fields..." onkeyup="searchFields()">
                 </div>
 
-                <!-- Image Upload Fields -->
-                <div class="image-upload-container mt-4 d-flex justify-content-center gap-3">
-                    <div class="form-group text-center">
-                        <label for="fieldImage01" class="form-label d-block">Field Image 1</label>
-                        <div class="image-upload-wrapper">
-                            <img id="previewImage01" class="image-preview"
-                                 src="https://via.placeholder.com/200x200?text=Click+to+upload+Image+1" alt="Image 1 Preview">
-                            <input type="file" class="form-control d-none" id="fieldImage01" name="fieldImage01" accept="image/*"
-                                   required>
+                <form id="fieldForm" class="mt-4" enctype="multipart/form-data">
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label for="fieldCode" class="form-label">Field Code</label>
+                            <input type="text" class="form-control form-control-sm" id="fieldCode" name="fieldCode" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="fieldName" class="form-label">Field Name</label>
+                            <input type="text" class="form-control form-control-sm" id="fieldName" name="fieldName" required>
                         </div>
                     </div>
-                    <div class="form-group text-center">
-                        <label for="fieldImage02" class="form-label d-block">Field Image 2</label>
-                        <div class="image-upload-wrapper">
-                            <img id="previewImage02" class="image-preview"
-                                 src="https://via.placeholder.com/200x200?text=Click+to+upload+Image+2" alt="Image 2 Preview">
-                            <input type="file" class="form-control d-none" id="fieldImage02" name="fieldImage02" accept="image/*"
-                                   required>
+                    <div class="row g-3 mt-3">
+                        <div class="col-md-6">
+                            <label for="fieldLocation" class="form-label">Field Location</label>
+                            <input type="text" class="form-control form-control-sm" id="fieldLocation" name="fieldLocation" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="fieldSize" class="form-label">Field Size (in acres)</label>
+                            <input type="number" step="0.01" class="form-control form-control-sm" id="fieldSize" name="fieldSize" required>
                         </div>
                     </div>
-                </div>
 
-                <!-- Action Buttons -->
-                <div class="d-flex justify-content-end mt-4 gap-2">
-                    <button type="submit" class="btn btn-primary btn-sm">Submit</button>
-                    <button type="button" class="btn btn-secondary btn-sm">Update</button>
-                </div>
-            </form>
+                    <!-- Image Upload Fields -->
+                    <div class="image-upload-container mt-4 d-flex justify-content-center gap-3">
+                        <div class="form-group text-center">
+                            <label for="fieldImage01" class="form-label d-block">Field Image 1</label>
+                            <div class="image-upload-wrapper">
+                                <img id="previewImage01" class="image-preview"
+                                     src="https://via.placeholder.com/200x200?text=Click+to+upload+Image+1" alt="Image 1 Preview">
+                                <input type="file" class="form-control d-none" id="fieldImage01" name="fieldImage01" accept="image/*"
+                                       required>
+                            </div>
+                        </div>
+                        <div class="form-group text-center">
+                            <label for="fieldImage02" class="form-label d-block">Field Image 2</label>
+                            <div class="image-upload-wrapper">
+                                <img id="previewImage02" class="image-preview"
+                                     src="https://via.placeholder.com/200x200?text=Click+to+upload+Image+2" alt="Image 2 Preview">
+                                <input type="file" class="form-control d-none" id="fieldImage02" name="fieldImage02" accept="image/*"
+                                       required>
+                            </div>
+                        </div>
+                    </div>
 
-            <!-- Table to Display Field Details -->
-            <div class="table-container mt-5">
-                <table class="table table-striped">
-                    <thead>
-                    <tr>
-                        <th>Field Code</th>
-                        <th>Field Name</th>
-                        <th>Location</th>
-                        <th>Size (Acres)</th>
-                        <th>Action</th>
-                    </tr>
-                    </thead>
-                    <tbody id="fieldTableBody">
-                    <!-- Field data rows will be inserted here -->
-                    </tbody>
-                </table>
+                    <!-- Action Buttons -->
+                    <div class="d-flex justify-content-end mt-4 gap-2">
+                        <button type="submit" class="btn btn-primary btn-sm">Submit</button>
+                        <button type="button" class="btn btn-secondary btn-sm">Update</button>
+                    </div>
+                </form>
+
+                <!-- Table to Display Field Details -->
+                <div class="table-container mt-5">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>Field Code</th>
+                            <th>Field Name</th>
+                            <th>Location</th>
+                            <th>Size (Acres)</th>
+                            <th>Action</th>
+                        </tr>
+                        </thead>
+                        <tbody id="fieldTableBody">
+                        <!-- Field data rows will be inserted here -->
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
+
+
     </div>
 
 <!-- Scripts -->
