@@ -1,3 +1,11 @@
+const token = getToken("token");
+console.log(token)
+
+if(!token || token == null || token == ""){
+    console.log("if true")
+    document.location.href = "../../login.html";
+}
+
 navigateSignInUpPage("#signInPage");
 
 function navigateSignInUpPage(page) {
@@ -135,3 +143,26 @@ function updateDateTime() {
 setInterval(updateDateTime, 1000);
 updateDateTime();
 
+
+// Image Preview functionality using jQuery
+$('.previewImage').on('click', function () {
+    const inputId = $(this).next('input[type="file"]').attr('id');
+    $('#' + inputId).click(); // Trigger the file input click
+});
+
+$('.imagesOfInput').on('change', function (e) {
+    const preview = $(this).prev('.previewImage'); // Get the corresponding preview image
+    const file = e.target.files[0]; // Get the selected file
+    const reader = new FileReader();
+
+    reader.onload = function (e) {
+        preview.attr('src', e.target.result); // Set the image preview src
+    };
+
+    reader.readAsDataURL(file); // Read the file as a data URL
+});
+
+
+function getToken(token){
+    return document.cookie.split(token+"=").pop(0).trim();
+}
