@@ -1,17 +1,14 @@
+navigateSignInUpPage("#signInPage");
 
-$("#signUpPage").css({display: 'none'});
-$("#allPageSidebar").css({display: 'none'});
-$("#mainContentOfPages").css({display: 'none'});
-
-$("#signUpPageInLogin").on('click', () => {
+function navigateSignInUpPage(page) {
     $("#signInPage").css({display: 'none'});
     $("#allPageSidebar").css({display: 'none'});
     $("#mainContentOfPages").css({display: 'none'});
+    $("#signUpPage").css({display: 'none'});
+    $(page).css({display: 'block'});
+}
 
-    $("#signUpPage").css({display: 'block'});
-});
-
-$("#btnSignIn").on('click', () => {
+function navigatePageSideBar(page) {
     $("#signInPage").css({display: 'none'});
     $("#signUpPage").css({display: 'none'});
     $("#fieldPage").css({display: 'none'});
@@ -21,155 +18,93 @@ $("#btnSignIn").on('click', () => {
     $("#vehiclePage").css({display: 'none'});
     $("#monitoringLogPage").css({display: 'none'});
     $("#userPage").css({display: 'none'});
+    $("#dashBoardPage").css({display: 'none'});
 
     $("#allPageSidebar").css({display: 'block'});
     $("#mainContentOfPages").css({display: 'block'});
     $("#Navbar").css({display: 'block'});
-    $("#dashBoardPage").css({display: 'block'});
+    $(page).css({display: 'block'});
+}
+
+function activeStyleInNavBar(button) {
+    $('#dashboardNav').removeClass('active');
+    $('#usersNav').removeClass('active');
+    $('#cropsNav').removeClass('active');
+    $('#fieldsNav').removeClass('active');
+    $('#monitoringLogsNav').removeClass('active');
+    $('#staffsNav').removeClass('active');
+    $('#equipmentsNav').removeClass('active');
+    $('#vehiclesNav').removeClass('active');
+
+    $(button).addClass('active');
+}
+
+function updatePageTitle(title) {
+    $("#pageTitle").text(title); // Update the text of the page title
+}
+
+$("#signUpNavInLoginPage").on('click', () => {
+    navigateSignInUpPage("#signUpPage");
+});
+
+
+$("#signInNavInSignUpPage").on('click', () => {
+    navigateSignInUpPage("#signInPage");
+});
+
+
+$("#btnSignIn").on('click', () => {
+    navigatePageSideBar("#dashBoardPage");
+});
+
+$("#btnSignUp").on('click', () => {
+    navigatePageSideBar("#dashBoardPage");
 });
 
 $("#dashboardNav").on('click', () => {
-    $("#signInPage").css({display: 'none'});
-    $("#signUpPage").css({display: 'none'});
-    $("#fieldPage").css({display: 'none'});
-    $("#staffPage").css({display: 'none'});
-    $("#cropPage").css({display: 'none'});
-    $("#equipmentPage").css({display: 'none'});
-    $("#vehiclePage").css({display: 'none'});
-    $("#monitoringLogPage").css({display: 'none'});
-    $("#userPage").css({display: 'none'});
-
-    $("#allPageSidebar").css({display: 'block'});
-    $("#mainContentOfPages").css({display: 'block'});
-    $("#Navbar").css({display: 'block'});
-    $("#dashBoardPage").css({display: 'block'});
+    navigatePageSideBar("#dashBoardPage");
+    activeStyleInNavBar("#dashboardNav");
+    updatePageTitle("Dashboard");
 });
 
 $("#usersNav").on('click', () => {
-    $("#signInPage").css({display: 'none'});
-    $("#signUpPage").css({display: 'none'});
-    $("#dashBoardPage").css({display: 'none'});
-    $("#fieldPage").css({display: 'none'});
-    $("#staffPage").css({display: 'none'});
-    $("#cropPage").css({display: 'none'});
-    $("#equipmentPage").css({display: 'none'});
-    $("#vehiclePage").css({display: 'none'});
-    $("#monitoringLogPage").css({display: 'none'});
-
-    $("#allPageSidebar").css({display: 'block'});
-    $("#mainContentOfPages").css({display: 'block'});
-    $("#Navbar").css({display: 'block'});
-    $("#userPage").css({display: 'block'});
+    navigatePageSideBar("#userPage");
+    activeStyleInNavBar("#usersNav");
+    updatePageTitle("User");
 });
 
 $("#cropsNav").on('click', () => {
-    $("#signInPage").css({display: 'none'});
-    $("#signUpPage").css({display: 'none'});
-    $("#fieldPage").css({display: 'none'});
-    $("#staffPage").css({display: 'none'});
-    $("#equipmentPage").css({display: 'none'});
-    $("#vehiclePage").css({display: 'none'});
-    $("#monitoringLogPage").css({display: 'none'});
-    $("#dashBoardPage").css({display: 'none'});
-    $("#userPage").css({display: 'none'});
-
-    $("#allPageSidebar").css({display: 'block'});
-    $("#mainContentOfPages").css({display: 'block'});
-    $("#Navbar").css({display: 'block'});
-    $("#cropPage").css({display: 'block'});
+    navigatePageSideBar("#cropPage");
+    activeStyleInNavBar("#cropsNav");
 });
 
 $("#fieldsNav").on('click', () => {
-    $("#signInPage").css({display: 'none'});
-    $("#signUpPage").css({display: 'none'});
-    $("#staffPage").css({display: 'none'});
-    $("#equipmentPage").css({display: 'none'});
-    $("#vehiclePage").css({display: 'none'});
-    $("#monitoringLogPage").css({display: 'none'});
-    $("#dashBoardPage").css({display: 'none'});
-    $("#userPage").css({display: 'none'});
-    $("#cropPage").css({display: 'none'});
-
-    $("#allPageSidebar").css({display: 'block'});
-    $("#mainContentOfPages").css({display: 'block'});
-    $("#Navbar").css({display: 'block'});
-    $("#fieldPage").css({display: 'block'});
+    navigatePageSideBar("#fieldPage");
+    activeStyleInNavBar("#fieldsNav");
 });
 
 $("#monitoringLogsNav").on('click', () => {
-    $("#signInPage").css({display: 'none'});
-    $("#signUpPage").css({display: 'none'});
-    $("#staffPage").css({display: 'none'});
-    $("#equipmentPage").css({display: 'none'});
-    $("#vehiclePage").css({display: 'none'});
-    $("#dashBoardPage").css({display: 'none'});
-    $("#userPage").css({display: 'none'});
-    $("#cropPage").css({display: 'none'});
-    $("#fieldPage").css({display: 'none'});
-
-    $("#allPageSidebar").css({display: 'block'});
-    $("#mainContentOfPages").css({display: 'block'});
-    $("#Navbar").css({display: 'block'});
-    $("#monitoringLogPage").css({display: 'block'});
+    navigatePageSideBar("#monitoringLogPage");
+    activeStyleInNavBar("#monitoringLogsNav");
 });
 
 $("#staffsNav").on('click', () => {
-    $("#signInPage").css({display: 'none'});
-    $("#signUpPage").css({display: 'none'});
-    $("#equipmentPage").css({display: 'none'});
-    $("#vehiclePage").css({display: 'none'});
-    $("#dashBoardPage").css({display: 'none'});
-    $("#userPage").css({display: 'none'});
-    $("#cropPage").css({display: 'none'});
-    $("#fieldPage").css({display: 'none'});
-    $("#monitoringLogPage").css({display: 'none'});
-
-    $("#allPageSidebar").css({display: 'block'});
-    $("#mainContentOfPages").css({display: 'block'});
-    $("#Navbar").css({display: 'block'});
-    $("#staffPage").css({display: 'block'});
+    navigatePageSideBar("#staffPage");
+    activeStyleInNavBar("#staffsNav");
 });
 
 $("#equipmentsNav").on('click', () => {
-    $("#signInPage").css({display: 'none'});
-    $("#signUpPage").css({display: 'none'});
-    $("#vehiclePage").css({display: 'none'});
-    $("#dashBoardPage").css({display: 'none'});
-    $("#userPage").css({display: 'none'});
-    $("#cropPage").css({display: 'none'});
-    $("#fieldPage").css({display: 'none'});
-    $("#monitoringLogPage").css({display: 'none'});
-    $("#staffPage").css({display: 'none'});
-
-    $("#allPageSidebar").css({display: 'block'});
-    $("#mainContentOfPages").css({display: 'block'});
-    $("#Navbar").css({display: 'block'});
-    $("#equipmentPage").css({display: 'block'});
+    navigatePageSideBar("#equipmentPage");
+    activeStyleInNavBar("#equipmentsNav");
 });
 
 $("#vehiclesNav").on('click', () => {
-    $("#signInPage").css({display: 'none'});
-    $("#signUpPage").css({display: 'none'});
-    $("#dashBoardPage").css({display: 'none'});
-    $("#userPage").css({display: 'none'});
-    $("#cropPage").css({display: 'none'});
-    $("#fieldPage").css({display: 'none'});
-    $("#monitoringLogPage").css({display: 'none'});
-    $("#staffPage").css({display: 'none'});
-    $("#equipmentPage").css({display: 'none'});
-
-    $("#allPageSidebar").css({display: 'block'});
-    $("#mainContentOfPages").css({display: 'block'});
-    $("#Navbar").css({display: 'block'});
-    $("#vehiclePage").css({display: 'block'});
+    navigatePageSideBar("#vehiclePage");
+    activeStyleInNavBar("#vehiclesNav");
 });
 
 $("#logoutNav").on('click', () => {
-    $("#signUpPage").css({display: 'none'});
-    $("#allPageSidebar").css({display: 'none'});
-    $("#mainContentOfPages").css({display: 'none'});
-
-    $("#signInPage").css({display: 'block'});
+    navigateSignInUpPage("#signInPage");
 });
 
 function updateDateTime() {
@@ -189,3 +124,4 @@ function updateDateTime() {
 // Update date and time every second
 setInterval(updateDateTime, 1000);
 updateDateTime();
+
