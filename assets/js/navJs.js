@@ -1,9 +1,11 @@
+const baseUrl = 'http://localhost:8080/CropMonitorSystem/api/v1/';
+
 const token = getToken("token");
 console.log(token)
 
 if(!token || token == null || token == ""){
     console.log("if true")
-    document.location.href = "../../login.html";
+    navigateSignInUpPage("#signInPage");
 }
 
 navigateSignInUpPage("#signInPage");
