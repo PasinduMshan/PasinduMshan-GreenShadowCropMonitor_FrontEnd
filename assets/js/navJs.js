@@ -55,10 +55,14 @@ $("#signInNavInSignUpPage").on('click', () => {
 
 $("#btnSignIn").on('click', () => {
     navigatePageSideBar("#dashBoardPage");
+    activeStyleInNavBar("#dashboardNav");
+    updatePageTitle("Dashboard");
 });
 
 $("#btnSignUp").on('click', () => {
     navigatePageSideBar("#dashBoardPage");
+    activeStyleInNavBar("#dashboardNav");
+    updatePageTitle("Dashboard");
 });
 
 $("#dashboardNav").on('click', () => {
@@ -76,31 +80,37 @@ $("#usersNav").on('click', () => {
 $("#cropsNav").on('click', () => {
     navigatePageSideBar("#cropPage");
     activeStyleInNavBar("#cropsNav");
+    updatePageTitle("Crops");
 });
 
 $("#fieldsNav").on('click', () => {
     navigatePageSideBar("#fieldPage");
     activeStyleInNavBar("#fieldsNav");
+    updatePageTitle("Fields");
 });
 
 $("#monitoringLogsNav").on('click', () => {
     navigatePageSideBar("#monitoringLogPage");
     activeStyleInNavBar("#monitoringLogsNav");
+    updatePageTitle("Monitoring Log Service");
 });
 
 $("#staffsNav").on('click', () => {
     navigatePageSideBar("#staffPage");
     activeStyleInNavBar("#staffsNav");
+    updatePageTitle("Staff");
 });
 
 $("#equipmentsNav").on('click', () => {
     navigatePageSideBar("#equipmentPage");
     activeStyleInNavBar("#equipmentsNav");
+    updatePageTitle("Equipments");
 });
 
 $("#vehiclesNav").on('click', () => {
     navigatePageSideBar("#vehiclePage");
     activeStyleInNavBar("#vehiclesNav");
+    updatePageTitle("Vehicles");
 });
 
 $("#logoutNav").on('click', () => {
