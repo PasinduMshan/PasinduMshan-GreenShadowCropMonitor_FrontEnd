@@ -221,17 +221,17 @@
                         <div class="col-md-4">
                             <label for="gender" class="form-label">Gender</label>
                             <select id="gender" class="form-select form-select-sm" required>
-                                <option value="MALE">Male</option>
-                                <option value="FEMALE">Female</option>
+                                <option value="MALE">MALE</option>
+                                <option value="FEMALE">FEMALE</option>
                             </select>
                         </div>
                         <div class="col-md-4">
                             <label for="StaffRole" class="form-label">Role</label>
                             <select id="StaffRole" class="form-select form-select-sm" name="role" required>
-                                <option value="MANAGER">Manager</option>
-                                <option value="EMPLOYEE">Employee</option>
-                                <option value="ADMINISTRATIVE">Administrative</option>
-                                <option value="SCIENTIST">Scientist</option>
+                                <option value="MANAGER">MANAGER</option>
+                                <option value="EMPLOYEE">EMPLOYEE</option>
+                                <option value="ADMINISTRATIVE">ADMINISTRATIVE</option>
+                                <option value="SCIENTIST">SCIENTIST</option>
                             </select>
                         </div>
                     </div>
@@ -270,7 +270,7 @@
                     </div>
 
                     <div class="mt-4 d-flex justify-content-end gap-2">
-                        <button type="submit" class="btn btn-primary btn-sm">Submit</button>
+                        <button id="btnStaffSave" type="button" class="btn btn-primary btn-sm">Submit</button>
                         <button type="button" class="btn btn-secondary btn-sm">Update</button>
                     </div>
                 </form>
@@ -665,5 +665,6 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="controller/LogInController.js"></script>
     <script src="controller/FieldController.js"></script>
+    <script src="controller/StaffController.js"></script>
 </body>
 </html>
