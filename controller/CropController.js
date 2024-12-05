@@ -234,3 +234,74 @@ $('#btnUpdateCrop').on('click', () => {
         }
     });
 });
+
+// -------------Search Crop-----------------
+
+function searchCrops() {
+    // Get the search query
+    var searchQuery = $('#searchCrop').val().toLowerCase();
+    // Iterate through each row in the crop table body
+    $('#cropTable tbody tr').each(function() {
+        var row = $(this);
+        // Get the text content of each cell in the row
+        var cropCode = row.find('td').eq(0).text().toLowerCase();
+        var commonName = row.find('td').eq(1).text().toLowerCase();
+        var scientificName = row.find('td').eq(2).text().toLowerCase();
+        var category = row.find('td').eq(3).text().toLowerCase();
+        // Check if the search query matches any cell content
+        if (cropCode.includes(searchQuery) || commonName.includes(searchQuery) || scientificName.includes(searchQuery)
+            || category.includes(searchQuery)) {
+            row.show(); // Show the row if it matches
+        } else {
+            row.hide(); // Hide the row if it doesn't match
+        }
+    });
+}
+
+// -----------------------------------delete Crop-------------------------
+
+$("#CropTableBody").on('click', '.crop-delete-btn', function () {
+    var cropCode = $(this).closest('tr').data('crop-code'); // Consistent attribute
+    console.log("Attempting to delete Crop with Code:", cropCode);
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to undo this action!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
+        confirmButtonText: 'Yes, delete it!',
+        cancelButtonText: 'No, cancel!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                method: "DELETE",
+                url: baseUrl + `crop/${cropCode}`,
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json'
+                },
+                success: function(response) {
+                    console.log("Crop deleted successfully:", response);
+                    $(`tr[data-crop-code='${cropCode}']`).remove();
+                    clearCropFields();
+                    Swal.fire(
+                        'Deleted!',
+                        'The crop has been deleted.',
+                        'success'
+                    );
+                },
+                error: function(error) {
+                    console.error("Error deleting crop:", error);
+                    Swal.fire(
+                        'Error!',
+                        'There was an issue deleting the crop.',
+                        'error'
+                    );
+                }
+            });
+        } else {
+            console.log("Deletion cancelled by user.");
+        }
+    });
+});
