@@ -124,6 +124,7 @@ $("#vehiclesNav").on('click', () => {
     activeStyleInNavBar("#vehiclesNav");
     updatePageTitle("Vehicles");
     loadAllStaffID();
+    loadVehicleTable();
 });
 
 $("#logoutNav").on('click', () => {
