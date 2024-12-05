@@ -276,4 +276,29 @@ function searchFields() {
     });
 }
 
-// -----------------------------------get Staff by SearchBar-------------------------
+// -----------------------------------delete Staff-------------------------
+$("#StaffTableBody").on('click', '.staff-delete-btn', function () {
+    // Get the staffId from the row data attribute
+    var staffId = $(this).closest('tr').data('staff-id');
+    console.log("Deleting Staff with ID:", staffId);
+
+    // Send DELETE request to the server
+    $.ajax({
+        method: "DELETE",
+        url: baseUrl + `staff/${staffId}`,
+        headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+        },
+        success: function(response) {
+            console.log("Staff deleted successfully:", response);
+            // Remove the deleted row from the table
+            $(`tr[data-staff-id='${staffId}']`).remove();
+            clearStaffFields();
+            loadStaffTable();
+        },
+        error: function(error) {
+            console.error("Error deleting field:", error);
+        }
+    });
+});
