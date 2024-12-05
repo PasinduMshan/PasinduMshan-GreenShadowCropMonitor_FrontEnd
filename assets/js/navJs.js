@@ -97,6 +97,7 @@ $("#fieldsNav").on('click', () => {
     navigatePageSideBar("#fieldPage");
     activeStyleInNavBar("#fieldsNav");
     updatePageTitle("Fields");
+    loadFieldTable();
 });
 
 $("#monitoringLogsNav").on('click', () => {
@@ -146,25 +147,35 @@ setInterval(updateDateTime, 1000);
 updateDateTime();
 
 
-// Image Preview functionality using jQuery
-$('.previewImage').on('click', function () {
-    const inputId = $(this).next('input[type="file"]').attr('id');
-    $('#' + inputId).click(); // Trigger the file input click
-});
-
-$('.imagesOfInput').on('change', function (e) {
-    const preview = $(this).prev('.previewImage'); // Get the corresponding preview image
-    const file = e.target.files[0]; // Get the selected file
-    const reader = new FileReader();
-
-    reader.onload = function (e) {
-        preview.attr('src', e.target.result); // Set the image preview src
-    };
-
-    reader.readAsDataURL(file); // Read the file as a data URL
-});
-
-
 function getToken(token){
     return document.cookie.split(token+"=").pop(0).trim();
 }
+
+(function ($) {
+    'use strict';
+    $(function () {
+        // Trigger file input click on image preview click
+        $('.previewImage').on('click', function () {
+            const inputId = $(this).next('input[type="file"]').attr('id');
+            $('#' + inputId).click(); // Trigger the file input click
+        });
+
+        // Handle image selection and preview update
+        $('.imagesOfInput').on('change', function (e) {
+            const preview = $(this).prev('.previewImage'); // Get the corresponding preview image
+            const file = e.target.files[0]; // Get the selected file
+            const reader = new FileReader();
+
+            reader.onload = function (e) {
+                preview.attr('src', e.target.result); // Set the image preview src
+            };
+
+            if (file) {
+                reader.readAsDataURL(file); // Read the file as a data URL
+            } else {
+                // If no file is selected, clear the preview
+                preview.attr('src', 'https://via.placeholder.com/200x200?text=Click+to+upload+Image');
+            }
+        });
+    });
+})(jQuery);
