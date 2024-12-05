@@ -115,6 +115,42 @@ function validateField(formData) {
 
 
 $("#fieldTableBody").on('click', 'tr', function () {
+    var fieldId = $(this).closest('tr').find('td').first().text();
+    console.log("Selected Field ID:", fieldId);
 
+    $.ajax({
+        method: "GET",
+        url: baseUrl + `fields/${fieldId}`,
+        headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+        },
+        success: function (field) {
+            console.log("Field Data:", field);
 
+            // Populate text fields
+            $('#fieldCode').val(field.fieldCode);
+            $('#fieldName').val(field.fieldName);
+            $('#fieldLocation').val(field.fieldLocation);
+            $('#fieldSize').val(field.fieldSize);
+
+            // Handle images
+            if (field.fieldImage01) {
+                $("#previewFieldImage01").attr("src", "data:image/png;base64," + field.fieldImage01);
+            } else {
+                $("#previewFieldImage01").attr("src", "https://via.placeholder.com/200x200?text=Click+to+upload+Image+1");
+            }
+
+            if (field.fieldImage02) {
+                $("#previewFieldImage02").attr("src", "data:image/png;base64," + field.fieldImage02);
+            } else {
+                $("#previewFieldImage02").attr("src", "https://via.placeholder.com/200x200?text=Click+to+upload+Image+2");
+            }
+        },
+        error: function (error) {
+            console.error("Error fetching field data:", error);
+        }
+    });
 });
+
+
