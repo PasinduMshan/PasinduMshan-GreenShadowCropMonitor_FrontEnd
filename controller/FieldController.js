@@ -123,28 +123,49 @@ $("#fieldTableBody").on('click', 'tr', function () {
         url: baseUrl + `fields/${fieldId}`,
         headers: {
             'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
         },
         success: function (field) {
-            console.log("Field Data:", field);
-
-            // Populate text fields
+            // Set text fields
             $('#fieldCode').val(field.fieldCode);
             $('#fieldName').val(field.fieldName);
             $('#fieldLocation').val(field.fieldLocation);
             $('#fieldSize').val(field.fieldSize);
 
-            // Handle images
+            // Handle Image 01
             if (field.fieldImage01) {
-                $("#previewFieldImage01").attr("src", "data:image/png;base64," + field.fieldImage01);
-            } else {
-                $("#previewFieldImage01").attr("src", "https://via.placeholder.com/200x200?text=Click+to+upload+Image+1");
+                console.log("Base64 Image Data 01:", field.fieldImage01);
+
+                // Convert Base64 to File object
+                const file1 = base64ToFile(`data:image/png;base64,${field.fieldImage01}`, "image01.png");
+
+                // Use DataTransfer to simulate file input
+                const dataTransfer1 = new DataTransfer();
+                dataTransfer1.items.add(file1);
+
+                // Assign to input field
+                document.querySelector("#fieldImage01").files = dataTransfer1.files;
+
+                // Set preview
+                $("#previewFieldImage01").attr("src", `data:image/png;base64,${field.fieldImage01}`);
             }
 
+            // Handle Image 02
             if (field.fieldImage02) {
-                $("#previewFieldImage02").attr("src", "data:image/png;base64," + field.fieldImage02);
-            } else {
-                $("#previewFieldImage02").attr("src", "https://via.placeholder.com/200x200?text=Click+to+upload+Image+2");
+                console.log("Base64 Image Data 02:", field.fieldImage02);
+
+                // Convert Base64 to File object
+                const file2 = base64ToFile(`data:image/png;base64,${field.fieldImage02}`, "image02.png");
+
+                // Use DataTransfer to simulate file input
+                const dataTransfer2 = new DataTransfer();
+                dataTransfer2.items.add(file2);
+
+                // Assign to input field
+                document.querySelector("#fieldImage02").files = dataTransfer2.files;
+
+                // Set preview
+                $("#previewFieldImage02").attr("src", `data:image/png;base64,${field.fieldImage02}`);
             }
         },
         error: function (error) {
@@ -152,5 +173,55 @@ $("#fieldTableBody").on('click', 'tr', function () {
         }
     });
 });
+
+
+
+$('#btnFieldUpdate').on('click' ,()=>{
+
+    console.log("click update button")
+
+    const formData = new FormData();
+    formData.append("fieldCode", $('#fieldCode').val());
+    formData.append("fieldName", $('#fieldName').val());
+    formData.append("fieldLocation", $('#fieldLocation').val());
+    formData.append("fieldSize", $('#fieldSize').val());
+    formData.append("fieldImage01", $('#fieldImage01')[0].files[0]);
+    formData.append("fieldImage02", $('#fieldImage02')[0].files[0]);
+
+    console.log([...formData.entries()]); // For debugging purposes
+
+    if (!validateField(formData)) {
+        return;
+    }
+
+    var fieldId = $('#fieldCode').val();
+
+
+    $.ajax({
+        method: "PUT",
+        url: baseUrl + `fields/${fieldId}`,
+        data: formData,
+        contentType: false, // Required for FormData
+        processData: false, // Prevent jQuery from serializing FormData
+        headers: {
+            'Authorization': `Bearer ${token}`
+        },
+        success: function (result) {
+            loadFieldTable();
+            Swal.fire({
+                position: "center",
+                icon: "success",
+                title: "Save Field successfully",
+                showConfirmButton: false,
+                timer: 1500
+            });
+        },
+        error: function (result) {
+            console.log(result);
+        }
+    });
+
+})
+
 
 
