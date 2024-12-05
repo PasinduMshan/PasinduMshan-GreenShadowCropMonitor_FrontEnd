@@ -201,25 +201,21 @@ $('#btnFieldUpdate').on('click' ,()=>{
 
 function searchFields() {
     // Get the search query
-    var searchQuery = document.getElementById('searchField').value.toLowerCase();
-
-    // Get all the rows from the table (or list items) that you want to search
-    var rows = document.querySelectorAll('#fieldTable tbody tr');  // Assuming you have a table with ID 'fieldTable'
-
-    rows.forEach(function(row) {
-        // Get the text content from the table cells (e.g., Field Code, Field Name, etc.)
-        var cells = row.querySelectorAll('td');
-        var fieldCode = cells[0].textContent.toLowerCase();  // Assuming the field code is in the first column
-        var fieldName = cells[1].textContent.toLowerCase();  // Assuming the field name is in the second column
-        var fieldLocation = cells[2].textContent.toLowerCase();  // Assuming the field name is in the second column
-        var fieldSize = cells[3].textContent.toLowerCase();  // Assuming the field name is in the second column
-
-        // Check if the search query matches any cell content (Field Code or Field Name)
+    var searchQuery = $('#searchField').val().toLowerCase();
+    // Get all the rows from the table that you want to search
+    $('#fieldTable tbody tr').each(function() {
+        var row = $(this);
+        // Get the text content from the table cells
+        var fieldCode = row.find('td').eq(0).text().toLowerCase();
+        var fieldName = row.find('td').eq(1).text().toLowerCase();
+        var fieldLocation = row.find('td').eq(2).text().toLowerCase();
+        var fieldSize = row.find('td').eq(3).text().toLowerCase();
+        // Check if the search query matches any cell content (Field Code, Field Name, Field Location, or Field Size)
         if (fieldCode.includes(searchQuery) || fieldName.includes(searchQuery) || fieldLocation.includes(searchQuery)
             || fieldSize.includes(searchQuery)) {
-            row.style.display = '';  // Show the row if it matches the query
+            row.show();  // Show the row if it matches the query
         } else {
-            row.style.display = 'none';  // Hide the row if it doesn't match the query
+            row.hide();  // Hide the row if it doesn't match the query
         }
     });
 }

@@ -251,27 +251,21 @@ $('#btnStaffUpdate').on('click' ,()=>{
 
 // -----------------------------------get Staff by SearchBar-------------------------
 
-function searchFields() {
-    // Get the search query
-    var searchQuery = document.getElementById('searchStaff').value.toLowerCase();
-
-    // Get all the rows from the table (or list items) that you want to search
-    var rows = document.querySelectorAll('#StaffTable tbody tr');
-
-    rows.forEach(function(row) {
+function searchStaffs() {
+    var searchQuery = $('#searchStaff').val().toLowerCase();
+    // Get all the rows from the table that you want to search
+    $('#StaffTable tbody tr').each(function() {
+        var row = $(this);
         // Get the text content from the table cells
-        var cells = row.querySelectorAll('td');
-        var staffId = cells[0].textContent.toLowerCase();
-        var firstName = cells[1].textContent.toLowerCase();
-        var designation = cells[2].textContent.toLowerCase();
-        var contactNo = cells[4].textContent.toLowerCase();
-
+        var staffId = row.find('td').eq(0).text().toLowerCase();
+        var firstName = row.find('td').eq(1).text().toLowerCase();
+        var designation = row.find('td').eq(2).text().toLowerCase();
+        var contactNo = row.find('td').eq(4).text().toLowerCase();
         // Check if the search query matches any cell content (Field Code or Field Name)
-        if (staffId.includes(searchQuery) || firstName.includes(searchQuery) || designation.includes(searchQuery)
-            || contactNo.includes(searchQuery)) {
-            row.style.display = '';  // Show the row if it matches the query
+        if (staffId.includes(searchQuery) || firstName.includes(searchQuery) || designation.includes(searchQuery) || contactNo.includes(searchQuery)) {
+            row.show();  // Show the row if it matches the query
         } else {
-            row.style.display = 'none';  // Hide the row if it doesn't match the query
+            row.hide();  // Hide the row if it doesn't match the query
         }
     });
 }
