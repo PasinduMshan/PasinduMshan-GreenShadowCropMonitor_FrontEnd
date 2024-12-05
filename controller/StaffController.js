@@ -126,7 +126,7 @@ function loadStaffTable() {
                         <td>${staff.staffId}</td>
                         <td>${staff.firstName}</td>
                         <td>${staff.designation}</td>
-                        <td>${staff.email}</td>
+                        <td>${staff.contactNo}</td>
                         <td>
                             <button class="btn btn-danger btn-sm staff-delete-btn" title="Delete">
                                 <i class="fa fa-trash"></i>
@@ -247,5 +247,33 @@ $('#btnStaffUpdate').on('click' ,()=>{
             });
         }
     });
-
 })
+
+// -----------------------------------get Staff by SearchBar-------------------------
+
+function searchFields() {
+    // Get the search query
+    var searchQuery = document.getElementById('searchStaff').value.toLowerCase();
+
+    // Get all the rows from the table (or list items) that you want to search
+    var rows = document.querySelectorAll('#StaffTable tbody tr');
+
+    rows.forEach(function(row) {
+        // Get the text content from the table cells
+        var cells = row.querySelectorAll('td');
+        var staffId = cells[0].textContent.toLowerCase();
+        var firstName = cells[1].textContent.toLowerCase();
+        var designation = cells[2].textContent.toLowerCase();
+        var contactNo = cells[4].textContent.toLowerCase();
+
+        // Check if the search query matches any cell content (Field Code or Field Name)
+        if (staffId.includes(searchQuery) || firstName.includes(searchQuery) || designation.includes(searchQuery)
+            || contactNo.includes(searchQuery)) {
+            row.style.display = '';  // Show the row if it matches the query
+        } else {
+            row.style.display = 'none';  // Hide the row if it doesn't match the query
+        }
+    });
+}
+
+// -----------------------------------get Staff by SearchBar-------------------------
