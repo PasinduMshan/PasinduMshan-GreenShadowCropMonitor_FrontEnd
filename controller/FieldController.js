@@ -237,7 +237,7 @@ function clearFieldFields(){
     $('#previewFieldImage02').attr('src', 'https://via.placeholder.com/200x200?text=Click+to+upload+Image+2');
 }
 
-// -----------------------------------save Field-------------------------
+// -----------------------------------delete Field-------------------------
 
 $("#fieldTableBody").on('click', '.field-delete-btn', function () {
     // Get the fieldId from the row data attribute

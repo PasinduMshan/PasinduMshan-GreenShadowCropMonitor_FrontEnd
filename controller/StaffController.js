@@ -1,3 +1,5 @@
+// -----------------------------------save Staff-------------------------
+
 $('#btnStaffSave').on('click', () => {
     const staffData = {
         staffId: $('#staffId').val(),
@@ -48,6 +50,7 @@ $('#btnStaffSave').on('click', () => {
     });
 });
 
+// -----------------------------------clear field-------------------------
 
 function clearStaffFields() {
     $('#staffId').val('');
@@ -67,6 +70,7 @@ function clearStaffFields() {
     $('#address05').val('');
 }
 
+// -----------------------------------Staff validate-------------------------
 
 function validateStaff(staffData) {
     const showError = (message) => {
@@ -104,6 +108,8 @@ function validateStaff(staffData) {
     return true;
 }
 
+// -----------------------------------Get All Staff-------------------------
+
 function loadStaffTable() {
     $('#StaffTableBody').empty();
     $.ajax({
@@ -135,3 +141,111 @@ function loadStaffTable() {
         }
     });
 }
+
+// -----------------------------------Table Action-------------------------
+
+$("#StaffTableBody").on('click', 'tr', function () {
+    var staffId = $(this).closest('tr').find('td').first().text();
+    console.log("Selected Staff ID:", staffId);
+    $.ajax({
+        method: "GET",
+        url: baseUrl + `staff/${staffId}`,
+        headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json',
+        },
+        success: function (staff) {
+            $('#staffId').val(staff.staffId);
+            $('#firstName').val(staff.firstName);
+            $('#lastName').val(staff.lastName);
+            $('#designation').val(staff.designation);
+            $('#gender').val(staff.gender);
+            $('#StaffRole').val(staff.role);
+            $('#joinDate').val(formatDate(staff.joinDate));
+            $('#dateOfBirth').val(formatDate(staff.dateOfBirth));
+            $('#contactNo').val(staff.contactNo);
+            $('#email').val(staff.email);
+            $('#address01').val(staff.address01);
+            $('#address02').val(staff.address02);
+            $('#address03').val(staff.address03);
+            $('#address04').val(staff.address04);
+            $('#address05').val(staff.address05);
+        },
+        error: function (error) {
+            console.error("Error fetching Staff data:", error);
+            Swal.fire({
+                position: "top-end",
+                icon: "error",
+                title: "Error fetching Staff data:", error,
+                showConfirmButton: false,
+                timer: 1500,
+            });
+        }
+    });
+});
+
+// Function to convert ISO date to yyyy-MM-dd format
+function formatDate(isoDate) {
+    if (!isoDate) return '';
+    const date = new Date(isoDate);
+    return date.toISOString().split('T')[0]; // Extract yyyy-MM-dd
+}
+
+// -----------------------------------update Staff-------------------------
+
+$('#btnStaffUpdate').on('click' ,()=>{
+    console.log("click update button")
+    const staffData = {
+        staffId: $('#staffId').val(),
+        firstName: $('#firstName').val(),
+        lastName: $('#lastName').val(),
+        designation: $('#designation').val(),
+        gender: $('#gender').val(),
+        role: $('#StaffRole').val(),
+        joinDate: $('#joinDate').val(),
+        dateOfBirth: $('#dateOfBirth').val(),
+        contactNo: $('#contactNo').val(),
+        email: $('#email').val(),
+        address01: $('#address01').val(),
+        address02: $('#address02').val(),
+        address03: $('#address03').val(),
+        address04: $('#address04').val(),
+        address05: $('#address05').val()
+    };
+    console.log(staffData);
+    if (!validateStaff(staffData)) {
+        return;
+    }
+    var staffId = $('#staffId').val();
+    $.ajax({
+        method: "PUT",
+        url: baseUrl + `staff/${staffId}`,
+        data: JSON.stringify(staffData),  // Send the data as JSON
+        contentType: "application/json",  // Set content type to JSON
+        headers: {
+            'Authorization': `Bearer ${token}`
+        },
+        success: function (result) {
+            clearStaffFields();
+            loadStaffTable();
+            Swal.fire({
+                position: "center",
+                icon: "success",
+                title: "Staff Update successfully",
+                showConfirmButton: false,
+                timer: 1500
+            });
+        },
+        error: function (result) {
+            console.log(result);  // Log any errors for debugging
+            Swal.fire({
+                position: "top-end",
+                icon: "error",
+                title: "Error Staff data:", result,
+                showConfirmButton: false,
+                timer: 1500,
+            });
+        }
+    });
+
+})
