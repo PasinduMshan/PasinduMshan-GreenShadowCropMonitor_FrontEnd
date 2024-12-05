@@ -411,12 +411,16 @@
                             </select>
                         </div>
                         <div class="col-md-4">
-                            <label for="equipmentStaffId" class="form-label">Assigned Staff ID</label>
-                            <input type="text" class="form-control form-control-sm" id="equipmentStaffId" name="staffId">
+                            <label for="equipmentStaffId" class="form-label">Staff ID</label>
+                            <select id="equipmentStaffId" class="form-select form-select-sm" required>
+
+                            </select>
                         </div>
                         <div class="col-md-4">
-                            <label for="fieldCode" class="form-label">Field Code</label>
-                            <input type="text" class="form-control form-control-sm" id="equipmentFieldCode" name="fieldCode">
+                            <label for="equipmentFieldCode" class="form-label">Field Code</label>
+                            <select id="equipmentFieldCode" class="form-select form-select-sm" required>
+
+                            </select>
                         </div>
                     </div>
 
@@ -480,8 +484,9 @@
                         <div class="col-md-4">
                             <label for="vehicleStatus" class="form-label">Status</label>
                             <select id="vehicleStatus" class="form-select form-select-sm" required>
-                                <option value="ACTIVE">Active</option>
-                                <option value="INACTIVE">Inactive</option>
+                                <option value="AVAILABLE">Available</option>
+                                <option value="UNAVAILABLE">Unavailable</option>
+                                <option value="MAINTENANCE">Maintenance</option>
                             </select>
                         </div>
                         <div class="col-md-4">
@@ -668,5 +673,6 @@
     <script src="controller/FieldController.js"></script>
     <script src="controller/StaffController.js"></script>
     <script src="controller/VehicleController.js"></script>
+    <script src="controller/EquipmentController.js"></script>
 </body>
 </html>

@@ -117,6 +117,8 @@ $("#equipmentsNav").on('click', () => {
     navigatePageSideBar("#equipmentPage");
     activeStyleInNavBar("#equipmentsNav");
     updatePageTitle("Equipments");
+    loadAllEquipmentStaffID();
+    loadAllEquipmentFieldCode();
 });
 
 $("#vehiclesNav").on('click', () => {
