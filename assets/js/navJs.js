@@ -91,6 +91,8 @@ $("#cropsNav").on('click', () => {
     navigatePageSideBar("#cropPage");
     activeStyleInNavBar("#cropsNav");
     updatePageTitle("Crops");
+    loadAllFieldCodesInCrop();
+    loadCropTable();
 });
 
 $("#fieldsNav").on('click', () => {
@@ -98,6 +100,7 @@ $("#fieldsNav").on('click', () => {
     activeStyleInNavBar("#fieldsNav");
     updatePageTitle("Fields");
     loadFieldTable();
+    clearFieldFields();
 });
 
 $("#monitoringLogsNav").on('click', () => {

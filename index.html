@@ -331,7 +331,9 @@
                         </div>
                         <div class="col-md-4">
                             <label for="cropFieldCode" class="form-label">Field Code</label>
-                            <input type="text" class="form-control form-control-sm" id="cropFieldCode" name="fieldCode" required>
+                            <select id="cropFieldCode" class="form-select form-select-sm" required>
+
+                            </select>
                         </div>
                     </div>
 
@@ -357,7 +359,7 @@
 
                 <!-- Table to Display Crop Details -->
                 <div class="table-container">
-                    <table class="table table-striped">
+                    <table id="cropTable" class="table table-striped">
                         <thead>
                         <tr>
                             <th>Crop Code</th>
@@ -674,5 +676,6 @@
     <script src="controller/StaffController.js"></script>
     <script src="controller/VehicleController.js"></script>
     <script src="controller/EquipmentController.js"></script>
+    <script src="controller/CropController.js"></script>
 </body>
 </html>
