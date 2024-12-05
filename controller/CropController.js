@@ -23,9 +23,7 @@ function loadAllFieldCodesInCrop() {
 }
 
 // -----------------------------------save Crop-------------------------
-$('#cropForm').on('submit', function (e) {
-    e.preventDefault(); // Prevent form from submitting the traditional way
-
+$('#btnSaveCrop').on('click', () => {
     const cropData = new FormData();
     cropData.append("cropCode", $('#cropCode').val());
     cropData.append("cropCommonName", $('#cropCommonName').val());
@@ -33,14 +31,11 @@ $('#cropForm').on('submit', function (e) {
     cropData.append("cropCategory", $('#cropCategory').val());
     cropData.append("cropSeason", $('#cropSeason').val());
     cropData.append("fieldCode", $('#cropFieldCode').val());
-    cropData.append("cropImage", $('#cropImage01')[0].files[0]);
-
-    console.log([...cropData.entries()]); // Debugging: Log all form data
-
+    cropData.append("cropImage01", $('#cropImage01')[0].files[0]);
+    console.log([...cropData.entries()]);
     if (!validateCrop(cropData)) {
         return;
     }
-
     $.ajax({
         method: "POST",
         url: baseUrl + `crop`,
@@ -94,7 +89,7 @@ function validateCrop(formData) {
         { field: formData.get("cropCategory"), message: "Category is required" },
         { field: formData.get("cropSeason"), message: "Season is required" },
         { field: formData.get("fieldCode"), message: "Field Code is required" },
-        { field: formData.get("cropImage"), message: "Crop Image is required" },
+        { field: formData.get("cropImage01"), message: "Crop Image is required" },
     ];
     for (let i = 0; i < requiredFields.length; i++) {
         const field = requiredFields[i].field;
@@ -186,6 +181,56 @@ $("#CropTableBody").on('click', 'tr', function () {
         },
         error: function (error) {
             console.error("Error fetching crop data:", error);
+        }
+    });
+});
+
+// -------------Update Crop-----------------
+
+$('#btnUpdateCrop').on('click', () => {
+    console.log("Click update button");
+    const formData = new FormData();
+    formData.append("cropCode", $('#cropCode').val());
+    formData.append("cropCommonName", $('#cropCommonName').val());
+    formData.append("cropScientificName", $('#cropScientificName').val());
+    formData.append("cropCategory", $('#cropCategory').val());
+    formData.append("cropSeason", $('#cropSeason').val());
+    formData.append("fieldCode", $('#cropFieldCode').val());
+    formData.append("cropImage01", $('#cropImage01')[0].files[0]);
+    console.log([...formData.entries()]);
+    if (!validateCrop(formData)) {
+        return;
+    }
+    var cropCode = $('#cropCode').val();
+    $.ajax({
+        method: "PUT",
+        url: baseUrl + `crop/${cropCode}`,
+        data: formData,
+        contentType: false,
+        processData: false,
+        headers: {
+            'Authorization': `Bearer ${token}`
+        },
+        success: function (result) {
+            loadCropTable();
+            clearCropFields();
+            Swal.fire({
+                position: "center",
+                icon: "success",
+                title: "Crop updated successfully",
+                showConfirmButton: false,
+                timer: 1500
+            });
+        },
+        error: function (result) {
+            console.log(result);
+            Swal.fire({
+                position: "center",
+                icon: "error",
+                title: "Failed to update crop",
+                showConfirmButton: false,
+                timer: 1500
+            });
         }
     });
 });
