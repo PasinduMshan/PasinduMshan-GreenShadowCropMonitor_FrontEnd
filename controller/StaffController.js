@@ -247,7 +247,7 @@ $('#btnStaffUpdate').on('click' ,()=>{
             });
         }
     });
-})
+});
 
 // -----------------------------------get Staff by SearchBar-------------------------
 
@@ -280,25 +280,47 @@ function searchFields() {
 $("#StaffTableBody").on('click', '.staff-delete-btn', function () {
     // Get the staffId from the row data attribute
     var staffId = $(this).closest('tr').data('staff-id');
-    console.log("Deleting Staff with ID:", staffId);
-
-    // Send DELETE request to the server
-    $.ajax({
-        method: "DELETE",
-        url: baseUrl + `staff/${staffId}`,
-        headers: {
-            'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/json'
-        },
-        success: function(response) {
-            console.log("Staff deleted successfully:", response);
-            // Remove the deleted row from the table
-            $(`tr[data-staff-id='${staffId}']`).remove();
-            clearStaffFields();
-            loadStaffTable();
-        },
-        error: function(error) {
-            console.error("Error deleting field:", error);
+    console.log("Attempting to delete Staff with ID:", staffId);
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to undo this action!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
+        confirmButtonText: 'Yes, delete it!',
+        cancelButtonText: 'No, cancel!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                method: "DELETE",
+                url: baseUrl + `staff/${staffId}`,
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json'
+                },
+                success: function(response) {
+                    console.log("Staff deleted successfully:", response);
+                    $(`tr[data-staff-id='${staffId}']`).remove();
+                    clearStaffFields();
+                    loadStaffTable();
+                    Swal.fire(
+                        'Deleted!',
+                        'The staff member has been deleted.',
+                        'success'
+                    );
+                },
+                error: function(error) {
+                    console.error("Error deleting staff:", error);
+                    Swal.fire(
+                        'Error!',
+                        'There was an issue deleting the staff.',
+                        'error'
+                    );
+                }
+            });
+        } else {
+            console.log("Deletion cancelled by user.");
         }
     });
 });

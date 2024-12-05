@@ -238,29 +238,49 @@ function clearFieldFields(){
 }
 
 // -----------------------------------delete Field-------------------------
-
 $("#fieldTableBody").on('click', '.field-delete-btn', function () {
-    // Get the fieldId from the row data attribute
     var fieldId = $(this).closest('tr').data('field-id');
-    console.log("Deleting Field with ID:", fieldId);
-
-    // Send DELETE request to the server
-    $.ajax({
-        method: "DELETE",
-        url: baseUrl + `fields/${fieldId}`,
-        headers: {
-            'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/json'
-        },
-        success: function(response) {
-            console.log("Field deleted successfully:", response);
-            // Remove the deleted row from the table
-            $(`tr[data-field-id='${fieldId}']`).remove();
-            clearFieldFields();
-            loadFieldTable();
-        },
-        error: function(error) {
-            console.error("Error deleting field:", error);
+    console.log("Attempting to delete Field with ID:", fieldId);
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to undo this action!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
+        confirmButtonText: 'Yes, delete it!',
+        cancelButtonText: 'No, cancel!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                method: "DELETE",
+                url: baseUrl + `fields/${fieldId}`,
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json'
+                },
+                success: function(response) {
+                    console.log("Field deleted successfully:", response);
+                    $(`tr[data-field-id='${fieldId}']`).remove();
+                    clearFieldFields();
+                    loadFieldTable();
+                    Swal.fire(
+                        'Deleted!',
+                        'The field has been deleted.',
+                        'success'
+                    );
+                },
+                error: function(error) {
+                    console.error("Error deleting field:", error);
+                    Swal.fire(
+                        'Error!',
+                        'There was an issue deleting the field.',
+                        'error'
+                    );
+                }
+            });
+        } else {
+            console.log("Deletion cancelled by user.");
         }
     });
 });
