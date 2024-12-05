@@ -493,13 +493,15 @@
                     <div class="row g-3 mt-3">
                         <div class="col-md-4">
                             <label for="vehicleStaffId" class="form-label">Staff ID</label>
-                            <input type="text" class="form-control form-control-sm" id="vehicleStaffId" name="staffId" required>
+                            <select id="vehicleStaffId" class="form-select form-select-sm" required>
+
+                            </select>
                         </div>
                     </div>
 
                     <div class="mt-4 d-flex justify-content-end gap-2">
-                        <button type="submit" class="btn btn-primary btn-sm">Submit</button>
-                        <button type="button" class="btn btn-secondary btn-sm">Update</button>
+                        <button id="btnSaveVehicle" type="button" class="btn btn-primary btn-sm">Submit</button>
+                        <button id="btnUpdateVehicle" type="button" class="btn btn-secondary btn-sm">Update</button>
                     </div>
                 </form>
 
@@ -666,5 +668,6 @@
     <script src="controller/LogInController.js"></script>
     <script src="controller/FieldController.js"></script>
     <script src="controller/StaffController.js"></script>
+    <script src="controller/VehicleController.js"></script>
 </body>
 </html>
