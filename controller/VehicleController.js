@@ -177,4 +177,128 @@ $("#vehicleTableBody").on('click', 'tr', function () {
     });
 });
 
+// -------------------------update vehicle--------------------
+
+$('#btnUpdateVehicle').on('click' ,()=>{
+    console.log("click update button")
+    const vehicleData = {
+        vehicleCode: $('#vehicleCode').val(),
+        licensePlateNumber: $('#licensePlateNumber').val(),
+        vehicleCategory: $('#vehicleCategory').val(),
+        fuelType: $('#fuelType').val(),
+        status: $('#vehicleStatus').val(),
+        remarks: $('#remarks').val(),
+        staffId: $('#vehicleStaffId').val()
+    };
+    console.log(vehicleData);
+    if (!validateVehicle(vehicleData)) {
+        return;
+    }
+    var vehicleCode = $('#vehicleCode').val();
+    $.ajax({
+        method: "PUT",
+        url: baseUrl + `vehicle/${vehicleCode}`,
+        data: JSON.stringify(vehicleData),
+        contentType: "application/json",
+        headers: {
+            'Authorization': `Bearer ${token}`
+        },
+        success: function (result) {
+            loadVehicleTable();
+            clearVehicleFields();
+            Swal.fire({
+                position: "center",
+                icon: "success",
+                title: "Vehicle Update successfully",
+                showConfirmButton: false,
+                timer: 1500
+            });
+        },
+        error: function (result) {
+            console.log(result);
+            Swal.fire({
+                position: "top-end",
+                icon: "error",
+                title: "Error Vehicle data:", result,
+                showConfirmButton: false,
+                timer: 1500,
+            });
+        }
+    });
+})
+
+// -----------------------------------search Vehicles by SearchBar using jQuery-------------------------
+function searchVehicleFields() {
+    // Get the search query
+    var searchQuery = $('#searchVehicle').val().toLowerCase();
+
+    // Get all the rows from the vehicle table (or list items) that you want to search
+    $('#vehicleTableBody tr').each(function() {
+        var $row = $(this);
+
+        // Get the text content from the table cells
+        var vehicleCode = $row.find('td:nth-child(1)').text().toLowerCase();
+        var licensePlateNumber = $row.find('td:nth-child(2)').text().toLowerCase();
+        var fuelType = $row.find('td:nth-child(3)').text().toLowerCase();
+        var staffId = $row.find('td:nth-child(4)').text().toLowerCase();
+
+        // Check if the search query matches any cell content (Field Code or Field Name)
+        if (vehicleCode.includes(searchQuery) || licensePlateNumber.includes(searchQuery) ||
+            fuelType.includes(searchQuery) || staffId.includes(searchQuery)) {
+            $row.show();  // Show the row if it matches the query
+        } else {
+            $row.hide();  // Hide the row if it doesn't match the query
+        }
+    });
+}
+
+// -----------------------------------delete Vehicle-------------------------
+$("#vehicleTableBody").on('click', '.vehicle-delete-btn', function () {
+    // Get the vehicleCode from the row data attribute
+    var vehicleCode = $(this).closest('tr').data('vehicle-code');
+    console.log("Attempting to delete Vehicle with Code:", vehicleCode);
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to undo this action!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
+        confirmButtonText: 'Yes, delete it!',
+        cancelButtonText: 'No, cancel!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                method: "DELETE",
+                url: baseUrl + `vehicle/${vehicleCode}`,
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json'
+                },
+                success: function(response) {
+                    console.log("Vehicle deleted successfully:", response);
+                    $(`tr[data-vehicle-code='${vehicleCode}']`).remove();
+                    clearVehicleFields();
+                    loadVehicleTable();
+                    Swal.fire(
+                        'Deleted!',
+                        'The vehicle has been deleted.',
+                        'success'
+                    );
+                },
+                error: function(error) {
+                    console.error("Error deleting vehicle:", error);
+                    Swal.fire(
+                        'Error!',
+                        'There was an issue deleting the vehicle.',
+                        'error'
+                    );
+                }
+            });
+        } else {
+            console.log("Deletion cancelled by user.");
+        }
+    });
+});
+
 
