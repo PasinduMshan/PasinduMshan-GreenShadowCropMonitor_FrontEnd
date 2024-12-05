@@ -111,6 +111,7 @@ $("#staffsNav").on('click', () => {
     activeStyleInNavBar("#staffsNav");
     updatePageTitle("Staff");
     loadStaffTable();
+    clearStaffFields();
 });
 
 $("#equipmentsNav").on('click', () => {
@@ -119,6 +120,8 @@ $("#equipmentsNav").on('click', () => {
     updatePageTitle("Equipments");
     loadAllEquipmentStaffID();
     loadAllEquipmentFieldCode();
+    loadEquipmentTable();
+    clearEquipmentFields();
 });
 
 $("#vehiclesNav").on('click', () => {
@@ -127,6 +130,7 @@ $("#vehiclesNav").on('click', () => {
     updatePageTitle("Vehicles");
     loadAllStaffID();
     loadVehicleTable();
+    clearVehicleFields();
 });
 
 $("#logoutNav").on('click', () => {

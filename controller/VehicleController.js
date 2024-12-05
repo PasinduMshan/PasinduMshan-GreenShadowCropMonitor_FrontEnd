@@ -102,7 +102,7 @@ function clearVehicleFields() {
     $('#licensePlateNumber').val('');
     $('#vehicleCategory').val('');
     $('#fuelType').val('');
-    $('#vehicleStatus').val('ACTIVE'); // Default selection
+    $('#vehicleStatus').val('AVAILABLE'); // Default selection
     $('#remarks').val('');
     $('#vehicleStaffId').val('');
     loadAllStaffID();
@@ -300,5 +300,4 @@ $("#vehicleTableBody").on('click', '.vehicle-delete-btn', function () {
         }
     });
 });
-
 
