@@ -85,6 +85,7 @@ $("#usersNav").on('click', () => {
     navigatePageSideBar("#userPage");
     activeStyleInNavBar("#usersNav");
     updatePageTitle("User");
+    loadUserTable();
 });
 
 $("#cropsNav").on('click', () => {

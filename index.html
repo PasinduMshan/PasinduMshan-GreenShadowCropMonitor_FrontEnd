@@ -639,7 +639,7 @@
                         </div>
                         <div class="col-md-4">
                             <label for="userRole" class="form-label">Role</label>
-                            <select id="userRole" class="form-select form-select-sm" name="role" required>
+                            <select id="userRole" class="form-select form-select-sm" required>
                                 <option value="MANAGER">Manager</option>
                                 <option value="EMPLOYEE">Employee</option>
                                 <option value="ADMINISTRATIVE">Administrative</option>
@@ -649,8 +649,8 @@
                     </div>
 
                     <div class="mt-4 d-flex justify-content-end gap-2">
-                        <button type="submit" class="btn btn-primary btn-sm">Submit</button>
-                        <button type="button" class="btn btn-secondary btn-sm">Update</button>
+                        <button id="btnSaveUser" type="button" class="btn btn-primary btn-sm">Submit</button>
+                        <button id="btnUpdateUser" type="button" class="btn btn-secondary btn-sm">Update</button>
                     </div>
                 </form>
 
@@ -684,5 +684,6 @@
     <script src="controller/EquipmentController.js"></script>
     <script src="controller/CropController.js"></script>
     <script src="controller/LogServiceController.js"></script>
+    <script src="controller/UserController.js"></script>
 </body>
 </html>
