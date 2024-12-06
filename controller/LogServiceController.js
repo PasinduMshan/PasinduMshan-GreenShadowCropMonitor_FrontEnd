@@ -236,3 +236,102 @@ $("#logTableBody").on('click', 'tr', function () {
         }
     });
 });
+
+// ------------- Update Log -----------------
+
+$('#btnUpdateLogService').on('click', () => {
+    console.log("Click update button");
+    const formData = new FormData();
+    formData.append("logCode", $('#logCode').val());
+    formData.append("logDate", $('#logDate').val());
+    formData.append("logDetails", $('#logDetails').val());
+    formData.append("staffId", $('#logStaffId').val());
+    formData.append("fieldCode", $('#logeFieldCode').val());
+    formData.append("cropCode", $('#logeCropCode').val());
+    formData.append("observedImage", $('#observedImage')[0].files[0]);
+    console.log([...formData.entries()]);
+    if (!validateLog(formData)) {
+        return;
+    }
+    var logCode = $('#logCode').val();
+    $.ajax({
+        method: "PUT",
+        url: baseUrl + `monitoring_log/${logCode}`,
+        data: formData,
+        contentType: false,
+        processData: false,
+        headers: {
+            'Authorization': `Bearer ${token}`
+        },
+        success: function (result) {
+            loadLogTable();
+            clearLogFields();
+            Swal.fire({
+                position: "center",
+                icon: "success",
+                title: "Log updated successfully",
+                showConfirmButton: false,
+                timer: 1500
+            });
+        },
+        error: function (result) {
+            console.error(result);
+            Swal.fire({
+                position: "center",
+                icon: "error",
+                title: "Failed to update log",
+                showConfirmButton: false,
+                timer: 1500
+            });
+        }
+    });
+});
+
+// ----------------------------------- Delete Log -------------------------
+
+$("#logTableBody").on('click', '.log-delete-btn', function () {
+    var logCode = $(this).closest('tr').data('log-code');
+    console.log("Attempting to delete Log with Code:", logCode);
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "This action cannot be undone!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
+        confirmButtonText: 'Yes, delete it!',
+        cancelButtonText: 'No, cancel!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                method: "DELETE",
+                url: baseUrl + `monitoring_log/${logCode}`,
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json'
+                },
+                success: function (response) {
+                    console.log("Log deleted successfully:", response);
+                    $(`tr[data-log-code='${logCode}']`).remove();
+                    clearLogFields();
+                    loadLogTable();
+                    Swal.fire(
+                        'Deleted!',
+                        'The log has been deleted.',
+                        'success'
+                    );
+                },
+                error: function (error) {
+                    console.error("Error deleting log:", error);
+                    Swal.fire(
+                        'Error!',
+                        'There was an issue deleting the log.',
+                        'error'
+                    );
+                }
+            });
+        } else {
+            console.log("Deletion cancelled by user.");
+        }
+    });
+});
