@@ -562,15 +562,21 @@
                     <div class="row g-3 mt-3">
                         <div class="col-md-4">
                             <label for="logStaffId" class="form-label">Staff ID</label>
-                            <input type="text" class="form-control form-control-sm" id="logStaffId" name="staffId" required>
+                            <select id="logStaffId" class="form-select form-select-sm" required>
+
+                            </select>
                         </div>
                         <div class="col-md-4">
                             <label for="logeFieldCode" class="form-label">Field Code</label>
-                            <input type="text" class="form-control form-control-sm" id="logeFieldCode" name="fieldCode" required>
+                            <select id="logeFieldCode" class="form-select form-select-sm" required>
+
+                            </select>
                         </div>
                         <div class="col-md-4">
                             <label for="logeCropCode" class="form-label">Crop Code</label>
-                            <input type="text" class="form-control form-control-sm" id="logeCropCode" name="cropCode" required>
+                            <select id="logeCropCode" class="form-select form-select-sm" required>
+
+                            </select>
                         </div>
                     </div>
 
@@ -589,8 +595,8 @@
 
                     <!-- Action Buttons -->
                     <div class="d-flex justify-content-end mt-4 gap-2">
-                        <button type="submit" class="btn btn-primary btn-sm">Submit</button>
-                        <button type="button" class="btn btn-secondary btn-sm">Update</button>
+                        <button id="btnSaveLogService" type="button" class="btn btn-primary btn-sm">Submit</button>
+                        <button id="btnUpdateLogService" type="button" class="btn btn-secondary btn-sm">Update</button>
                     </div>
                 </form>
 
@@ -677,5 +683,6 @@
     <script src="controller/VehicleController.js"></script>
     <script src="controller/EquipmentController.js"></script>
     <script src="controller/CropController.js"></script>
+    <script src="controller/LogServiceController.js"></script>
 </body>
 </html>

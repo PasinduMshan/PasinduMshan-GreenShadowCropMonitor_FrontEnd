@@ -23,6 +23,7 @@ function loadAllFieldCodesInCrop() {
 }
 
 // -----------------------------------save Crop-------------------------
+
 $('#btnSaveCrop').on('click', () => {
     const cropData = new FormData();
     cropData.append("cropCode", $('#cropCode').val());
