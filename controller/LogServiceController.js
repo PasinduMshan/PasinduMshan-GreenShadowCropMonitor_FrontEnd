@@ -90,7 +90,7 @@ $('#btnSaveLogService').on('click', () => {
 
     $.ajax({
         method: "POST",
-        url: baseUrl + `log`,
+        url: baseUrl + `monitoring_log`,
         data: logData,
         contentType: false,
         processData: false,
@@ -98,7 +98,8 @@ $('#btnSaveLogService').on('click', () => {
             'Authorization': `Bearer ${token}`
         },
         success: function (result) {
-
+            loadLogTable();
+            clearLogFields();
             Swal.fire({
                 position: "center",
                 icon: "success",
@@ -119,6 +120,8 @@ $('#btnSaveLogService').on('click', () => {
         }
     });
 });
+
+// -----------------------------------validate Log service-------------------------
 
 function validateLog(formData) {
     const showError = (message) => {
@@ -150,4 +153,52 @@ function validateLog(formData) {
         }
     }
     return true;
+}
+
+// -----------------------------------LoadAll Log service-------------------------
+
+function loadLogTable() {
+    $('#logTableBody').empty();
+    $.ajax({
+        method: "GET",
+        url: baseUrl + `monitoring_log`,
+        headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+        },
+        success: function (result) {
+            result.forEach(log => {
+                $('#logTableBody').append(`
+                    <tr data-log-code="${log.logCode}">
+                        <td>${log.logCode}</td>
+                        <td>${formatDate(log.logDate)}</td>
+                        <td>${log.fieldCode}</td>
+                        <td>${log.cropCode}</td>
+                        <td>${log.staffId}</td>
+                        <td>
+                            <button class="btn btn-danger btn-sm log-delete-btn" title="Delete">
+                                <i class="fa fa-trash"></i>
+                            </button>
+                        </td>
+                    </tr>
+                `);
+            });
+        },
+        error: function (error) {
+            console.error("Error loading logs:", error);
+        }
+    });
+}
+
+// -----------------------------------clear Log service-------------------------
+
+function clearLogFields() {
+    $('#logCode').val("");
+    $('#logDate').val("");
+    $('#logDetails').val("");
+    $('#logStaffId').val("");
+    $('#logeFieldCode').val("");
+    $('#logeCropCode').val("");
+    $('#observedImage').val("");
+    $('#previewImage01').attr("src", "https://via.placeholder.com/200x200?text=Click+to+upload+Image+1");
 }

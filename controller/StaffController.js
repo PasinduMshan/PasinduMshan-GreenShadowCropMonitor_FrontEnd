@@ -184,12 +184,7 @@ $("#StaffTableBody").on('click', 'tr', function () {
     });
 });
 
-// Function to convert ISO date to yyyy-MM-dd format
-function formatDate(isoDate) {
-    if (!isoDate) return '';
-    const date = new Date(isoDate);
-    return date.toISOString().split('T')[0]; // Extract yyyy-MM-dd
-}
+
 
 // -----------------------------------update Staff-------------------------
 
