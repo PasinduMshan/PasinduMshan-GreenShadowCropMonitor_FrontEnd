@@ -53,32 +53,24 @@ function updatePageTitle(title) {
     $("#pageTitle").text(title); // Update the text of the page title
 }
 
-$("#signUpNavInLoginPage").on('click', () => {
-    navigateSignInUpPage("#signUpPage");
-});
-
-
-$("#signInNavInSignUpPage").on('click', () => {
-    navigateSignInUpPage("#signInPage");
-});
-
-
 $("#btnSignIn").on('click', () => {
     navigatePageSideBar("#dashBoardPage");
     activeStyleInNavBar("#dashboardNav");
     updatePageTitle("Dashboard");
-});
-
-$("#btnSignUp").on('click', () => {
-    navigatePageSideBar("#dashBoardPage");
-    activeStyleInNavBar("#dashboardNav");
-    updatePageTitle("Dashboard");
+    loadStaffTable();
+    loadEquipmentTable();
+    loadVehicleTable();
+    loadFieldTable();
 });
 
 $("#dashboardNav").on('click', () => {
     navigatePageSideBar("#dashBoardPage");
     activeStyleInNavBar("#dashboardNav");
     updatePageTitle("Dashboard");
+    loadStaffTable();
+    loadEquipmentTable();
+    loadVehicleTable();
+    loadFieldTable();
 });
 
 $("#usersNav").on('click', () => {

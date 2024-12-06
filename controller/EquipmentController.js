@@ -160,6 +160,8 @@ function loadEquipmentTable() {
                     </tr>
                 `);
             });
+            var equipmentsCount = $('#EquipmentTableBody tr').length;
+            $('#equipmentCount').text(`${equipmentsCount}`);
         },
         error: function (result) {
             console.error("Error loading equipment data:", result);

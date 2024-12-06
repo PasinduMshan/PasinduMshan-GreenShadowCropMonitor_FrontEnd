@@ -135,6 +135,8 @@ function loadVehicleTable() {
                     </tr>
                 `);
             });
+            var vehicleCount = $('#vehicleTableBody tr').length;
+            $('#vehicleCount').text(`${vehicleCount}`);
         },
         error: function (result) {
             console.error("Error loading vehicle data:", result);

@@ -135,6 +135,8 @@ function loadStaffTable() {
                     </tr>
                 `);
             });
+            var staffMemberCount = $('#StaffTableBody tr').length;
+            $('#staffCount').text(`${staffMemberCount}`);
         },
         error: function (result) {
             console.log(result);

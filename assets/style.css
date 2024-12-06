@@ -195,3 +195,112 @@ table td {
     padding: 8px;
     border: 1px solid #28a745;
 }
+
+/* Base styles for all dashboard cards within #dashBoardPage */
+#dashBoardPage .card {
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s, box-shadow 0.2s;
+    background: linear-gradient(135deg, #6ab04c, #badc58); /* Green gradient */
+    color: #fff;
+}
+
+#dashBoardPage .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+#dashBoardPage .card-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+#dashBoardPage .card-text {
+    font-size: 2rem;
+    font-weight: 600;
+    margin: 0;
+}
+
+#dashBoardPage .card-body {
+    padding: 20px;
+}
+
+#dashBoardPage .card-body h5,
+#dashBoardPage .card-body p {
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* Ensure the cards take full height and align content properly */
+#dashBoardPage .card {
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s, box-shadow 0.2s;
+    background: linear-gradient(135deg, #6ab04c, #badc58); /* Green gradient */
+    color: #fff;
+    height: 100%; /* Ensure the card takes full height */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Space between title, text and footer */
+}
+
+/* Hover effect */
+#dashBoardPage .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+/* Card body content */
+#dashBoardPage .card-body {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1; /* This makes sure card content fills the available space */
+}
+
+/* Styling for card title */
+#dashBoardPage .card-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+/* Styling for the number text */
+#dashBoardPage .card-text {
+    font-size: 2rem;
+    font-weight: 600;
+    text-align: center;
+    margin: 0;
+    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
+}
+
+/* Space between cards */
+#dashBoardPage .row .col-md-3 {
+    margin-bottom: 20px;
+}
+
+/* Making sure the cards are centered and flexible */
+#dashBoardPage .container .row {
+    justify-content: center;
+}
+
+/* Optional: Add footer to the cards for additional content */
+#dashBoardPage .card-footer {
+    text-align: center;
+    margin-top: auto; /* Pushes footer to the bottom of the card */
+    padding: 10px;
+}
+
+/* Additional hover effect for each card */
+#dashBoardPage .col-md-3 {
+    transition: all 0.3s ease;
+}
+
+#dashBoardPage .col-md-3:hover {
+    transform: scale(1.05);
+}

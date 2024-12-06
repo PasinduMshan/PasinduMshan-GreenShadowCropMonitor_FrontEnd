@@ -42,7 +42,7 @@ $('#btnFieldSave').on('click', () => {
 
 // -----------------------------------Get All Field-------------------------
 
-function loadFieldTable(){
+function loadFieldTable() {
     $('#fieldTable tbody').empty();
     $.ajax({
         method:"GET",
@@ -53,7 +53,7 @@ function loadFieldTable(){
         },
         success:function(result){
             result.forEach(field => {
-                $('#fieldTable tbody').append(`
+                $('#fieldTableBody').append(`
                     <tr data-field-id="${field.fieldCode}">                                 
                         <td>${field.fieldCode}</td>
                         <td>${field.fieldName}</td>
@@ -67,6 +67,8 @@ function loadFieldTable(){
                     </tr>
                 `);
             });
+            var fieldCount = $('#fieldTableBody tr').length;
+            $('#fieldCount').text(`${fieldCount}`);
         },
         error:function(result){
             console.log(result);
