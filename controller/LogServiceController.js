@@ -81,13 +81,10 @@ $('#btnSaveLogService').on('click', () => {
     logData.append("fieldCode", $('#logeFieldCode').val());
     logData.append("cropCode", $('#logeCropCode').val());
     logData.append("observedImage", $('#observedImage')[0].files[0]);
-
     console.log([...logData.entries()]);
-
     if (!validateLog(logData)) {
         return;
     }
-
     $.ajax({
         method: "POST",
         url: baseUrl + `monitoring_log`,
@@ -134,7 +131,6 @@ function validateLog(formData) {
         });
         console.log(message);
     };
-
     const requiredFields = [
         { field: formData.get("logCode"), message: "Log Code is required" },
         { field: formData.get("logDate"), message: "Log Date is required" },
@@ -144,7 +140,6 @@ function validateLog(formData) {
         { field: formData.get("cropCode"), message: "Crop Code is required" },
         { field: formData.get("observedImage"), message: "Observed Image is required" }
     ];
-
     for (let i = 0; i < requiredFields.length; i++) {
         const field = requiredFields[i].field;
         if (!field || (typeof field === "string" && field.trim() === "")) {
@@ -202,3 +197,42 @@ function clearLogFields() {
     $('#observedImage').val("");
     $('#previewImage01').attr("src", "https://via.placeholder.com/200x200?text=Click+to+upload+Image+1");
 }
+
+
+// ----------------------------------- Get Log by Table Action -------------------------
+
+$("#logTableBody").on('click', 'tr', function () {
+    console.log("clicked");
+    var logCode = $(this).closest('tr').find('td').first().text();
+    console.log("Selected Log Code:", logCode);
+    $.ajax({
+        method: "GET",
+        url: baseUrl + `monitoring_log/${logCode}`,
+        headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json',
+        },
+        success: function (log) {
+            $('#logCode').val(log.logCode);
+            $('#logDate').val(formatDate(log.logDate));
+            $('#logDetails').val(log.logDetails);
+            $('#logStaffId').val(log.staffId);
+            $('#logeFieldCode').val(log.fieldCode);
+            $('#logeCropCode').val(log.cropCode);
+            if (log.observedImage) {
+                // Convert Base64 to File object
+                const file1 = base64ToFile(`data:image/png;base64,${log.observedImage}`, "observedImage.png");
+                // Use DataTransfer to simulate file input
+                const dataTransfer1 = new DataTransfer();
+                dataTransfer1.items.add(file1);
+                // Assign to input field
+                document.querySelector("#observedImage").files = dataTransfer1.files;
+                // Set preview
+                $("#previewImage01").attr("src", `data:image/png;base64,${log.observedImage}`);
+            }
+        },
+        error: function (error) {
+            console.error("Error fetching log data:", error);
+        }
+    });
+});
